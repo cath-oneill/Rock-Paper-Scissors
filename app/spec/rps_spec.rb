@@ -1,4 +1,4 @@
-require_relative '../lib/round.rb'
+require_relative '../lib/rps/round.rb'
 
 describe 'RPS_Logic' do
   describe 'Round' do

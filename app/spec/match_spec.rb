@@ -1,4 +1,4 @@
-require_relative '../lib/match.rb'
+require_relative '../lib/rps/match.rb'
 
 describe 'RPS_Logic' do
   describe 'Match' do
