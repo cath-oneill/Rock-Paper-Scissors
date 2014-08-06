@@ -1,11 +1,9 @@
 <div align="center">
-  <h2>Session</h2>
-  <% if @user %>
-    You are signed in as <%= @user.username %><br /><br />
-    <a href='/signout'>Sign Out</a>
-  <% else %>
-    You are not signed in!<br /><br />
-    <a href='/signin'>Sign In</a><br />
-    <a href='/signup'>Sign Up</a>
-  <% end %>
+  <h2>Login</h2>
+  <form action='/signin' method='post'>
+    <input type='text' name='username' placeholder='Username'><br>
+    <input type='password' name='password' placeholder='Password'><br />
+    <input type='submit' value='Submit'>
+  </form>
+    <a href="#signup" class="button">Signup</a>
 </div>
