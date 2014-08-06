@@ -8,7 +8,44 @@ module RPS_Logic
       @profile_picture = profile_picture
       @join_at = join_at
       @user_id = user_id
+      @matches = []
     end
-  end
-  
+
+
+    def wins
+      wins = 0 
+      @matches.each do |match| 
+        if match.winner_id == user_id
+          win +=1
+        end 
+      end 
+      wins 
+    end   
+
+    def all_matches
+       @matches.count
+    end
+
+    def completed_matches
+      stats = 0
+      @matches.each do |match| 
+        if match.completed == true
+          stats +=1
+        end       
+      end 
+      stats
+    end   
+    
+    def wins_percentage
+      wins.to_f/ completed_matches
+    end   
+
+    def stats 
+      { wins: wins, 
+       all_matches: all_matches,
+       completed_matches: completed_matches,
+       wins_percentage: wins_percentage
+      }
+    end 
+  end   
 end
