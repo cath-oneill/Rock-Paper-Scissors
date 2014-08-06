@@ -1,0 +1,12 @@
+<div align="center">
+  <h2>Welcome! </h2>
+  <% if @user %>
+    You are signed in as <%= @user.username %><br /><br />
+    
+
+  <% else %>
+    You are not signed in!<br /><br />
+    <a href='/signin'>Sign In</a><br />
+    <a href='/signup'>Sign Up</a>
+  <% end %>
+</div>

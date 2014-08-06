@@ -1,0 +1,15 @@
+<center>
+  <h2>Players</h2>
+  <table>
+  
+  <% @all_users.each do |user| %>
+    <tr>
+      <td><%= user[:user_id] %></td>
+      <td><%= user[:name] %></td>
+      <td><a href='/newmatch/<%= user[:user_id] %>'>User's Name</a></td>
+    </tr>
+  <% end %>
+
+  </table><br /><br />
+
+</center>
