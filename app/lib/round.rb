@@ -11,7 +11,7 @@ module RPS_Logic
 
     def result
       if @player_1_move.nil? || @player_2_move.nil?
-        @result = nil
+        return @result = nil
       elsif @player_1_move == @player_2_move
         @result = 0
       elsif @player_1_move == "r"
