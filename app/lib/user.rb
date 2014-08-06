@@ -41,7 +41,7 @@ module RPS_Logic
     end   
 
     def stats 
-      { wins: wins, 
+      {wins: wins, 
        all_matches: all_matches,
        completed_matches: completed_matches,
        wins_percentage: wins_percentage
