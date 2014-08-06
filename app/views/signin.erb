@@ -1,12 +1,9 @@
 <div align="center">
-  <h2>Signup!</h2>
-  <% if flash[:alert] %>
-    Alert:<%= flash[:alert] %>
-  <% end %>
-  <form action='/signup' method='post'>
+  <h2>Login</h2>
+  <form action='/signin' method='post'>
     <input type='text' name='username' placeholder='Username'><br>
     <input type='password' name='password' placeholder='Password'><br />
-    <input type='password' name='password_conf' placeholder='Verify password'><br />
     <input type='submit' value='Submit'>
   </form>
+    <a href="#signup" class="button">Signup</a>
 </div>

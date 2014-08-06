@@ -1,3 +1,5 @@
+require 'digest/sha1'
+
 module RPS_Logic
   class User
     attr_reader :name, :profile_picture, :user_id, :join_at
@@ -47,5 +49,13 @@ module RPS_Logic
        wins_percentage: wins_percentage
       }
     end 
+
+    def update_password(password)
+      @password_digest = Digest::SHA1.hexdigest(password)
+    end
+
+    def has_password?(password)
+      Digest::SHA1.hexdigest(password) == @password_digest
+    end
   end   
 end
