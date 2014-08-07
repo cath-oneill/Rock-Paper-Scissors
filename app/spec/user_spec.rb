@@ -4,7 +4,7 @@ require_relative '../lib/rps/match.rb'
 describe 'RPS' do
   describe 'User' do
     before(:all) do
-      @user1 = RPS::user.new('bob', 'bob@bob')
+      @user1 = RPS::User.new('bob', 'bob@bob')
     end
     
     describe ".initialize" do
@@ -18,16 +18,22 @@ describe 'RPS' do
         expect(@user1.profile_pic).to be_nil
         expect(@user1.profile_pic).to be_nil
         expect(@user1.join_at).to be_nil
-        expect(@user1.matches).to eq('[]')
+        expect(@user1.matches).to eq([])
       end
+      it "describes all matches played by the user" do 
+        match1 = RPS::Match.new(10, 8)
+        match2 = RPS::Match.new(10, 4, 4, 10.45, true, 4)
+        @user1.matches << match1
+        expect(@user1.matches).to eq([match1]) 
     end
 
     describe "#wins" do
-      it "describes all wins for the user" do
-        @match1 = RPS::Match.new(10, 8, 5, 10.30, true, 10)
-        @match2 = RPS::Match.new(10, 4, 4, 10.45, true, 4)
-        @matches = [@match1, @match2]
-        expect(@use1.wins).to eq(1) 
+      xit "describes all wins for the user" do
+        match1 = RPS::Match.new(10, 8, 5, 10.30, true, 10)
+        match2 = RPS::Match.new(10, 4, 4, 10.45, true, 4)
+        @user1.matches << match1
+        @user1.matches << match2
+        expect(@user1.wins).to eq(1) 
       end
     end
     describe "#all_matches" do

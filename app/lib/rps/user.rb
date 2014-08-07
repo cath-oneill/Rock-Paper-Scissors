@@ -3,6 +3,7 @@ require 'digest/sha1'
 module RPS
   class User
     attr_reader :name, :profile_pic, :user_id, :password_digest, :email, :join_at, :matches
+    attr_accessor :matches
     def initialize(name, email, password_digest=nil, profile_pic=nil, join_at=nil, user_id=nil)
       @name = name
       @email = email

@@ -19,48 +19,35 @@ describe 'RPS' do
       end
     end
 
-    describe ".winner" do
+    describe "#winner" do
       it "describes player2 that wins the match if player is 2 " do
         @match1.winner(2)
         expect(@match1.winner_id).to eq(8) 
       end
     end
-    describe ".winner" do
+    describe "#winner" do
       it "gives nil if player is 4 " do
         match2 = RPS::Match.new(10, 8)
         match2.winner(4)
         expect(match2.winner_id).to be_nil 
       end 
     end
-
-
-    describe ".completed" do
-      xit "returns 0 for a tied game" do
-        @match1.player_1_move!('r')
-        @match1.player_2_move!('r')
-        result = @match1.result
-        expect(result).to eq(0)
+    describe "#completed!" do
+      it "returns true" do
+        result = @match1.completed!
+        expect(result).to eq(false)
       end
-
-      xit "returns a 1 if player 1 wins" do
-        @round1.player_1_move!('r')
-        @round1.player_2_move!('s')
-        result = @round1.result
-        expect(result).to eq(1)
-      end
-
-      xit "returns a 2 if player 2 wins" do
-        @round1.player_1_move!('p')
-        @round1.player_2_move!('s')
-        result = @round1.result
-        expect(result).to eq(2)
-      end
-
       xit "returns nil if the round is not complete" do
         @round1.player_1_move!('r')
         result = @round1.result
         expect(result).to eq(nil)
       end
     end
+
+    describe "#new_round_id" do
+
+    end 
+
+
   end
 end

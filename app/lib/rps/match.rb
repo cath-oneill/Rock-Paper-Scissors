@@ -35,8 +35,9 @@ module RPS
         @completed = true  
         winner(1) if player1 == 3
         winner(2) if player2 == 3
+        return true 
       else
-        false
+        return false
       end       
     end 
 
