@@ -9,6 +9,7 @@ use Rack::Flash
 get '/' do
   if session['rps']
     @user = RPS::GetUserInfo.run(session['rps'])
+    @match_info = RPS::GetMatchInfo.run(@user)
     erb :index
   else #not in session
     erb :signin

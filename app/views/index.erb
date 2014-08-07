@@ -1,16 +1,18 @@
-<div align="center">
+<div class="row">
   <h2>Welcome! </h2>
     You are signed in as <%= @user.name %><br /><br />
-    <row>
-	<% @user.matches.each do |match| %>
-	<div class="columns large-3">
-			<% if match.player_1_id == @user.user_id %>
-			<% opponent_id = match.player_2_id %>
-			<% else %>
-			<% opponent_id = match.player_1_id %>
-			<% end %>
-		<h4>GAME WITH <%= RPS::DBI.dbi.get_user_by_id(opponent_id).name %></h4>
-		<% end %>
+	<% @match_info.each do |match| %>
+	<div class="columns large-12 panel">
+    <form class="row" method = "get" action="/play/<%= match[:match_id] %>/<%= match[:current_round] %>">
+		<p>MATCH NUMBER: <%= match[:match_id] %></p>
+		<p>OPPONENT: <%= match[:opponent_name] %>, <%= match[:opponent_id] %></p>
+		<p>MATCH OVER? <%= match[:completed] %></p>
+		<a href="/play/"><p>PLAY ROUND # <%= match[:current_round] %> NOW! </p></a>
+		<p>CURRENT WINS: <%= match[:current_wins] %> </p>
+		<p>CURRENT LOSSES: <%= match[:current_losses] %> </p>
+		<p>CURRENT TIES: <%= match[:current_ties] %> </p>
+		<input type="submit" class="button" value = "PLAY THIS MATCH!">
+	</form>
 	</div>
-
+	<% end %>
 </div>

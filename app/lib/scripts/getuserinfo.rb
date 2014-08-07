@@ -10,6 +10,7 @@ module RPS
             m.rounds << r 
           end
         end
+        p current_user
         current_user
     end
   end

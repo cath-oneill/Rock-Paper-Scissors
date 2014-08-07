@@ -81,6 +81,10 @@ module RPS
       build_user(response.first)
     end
 
+    ##For use in list of matches on index page
+    def get_user_name_by_id(this_id)
+      get_user_by_id(this_id).name
+    end
     #FOR USE IN PLAYERS PAGE
     def get_all_users
       response = @db.exec("SELECT name user_id profile_pic FROM users")

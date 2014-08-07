@@ -11,4 +11,7 @@ require_relative 'scripts/signup.rb'
 require_relative 'scripts/signin.rb'
 require_relative 'scripts/getuserinfo.rb'
 require_relative 'scripts/createnewmatch.rb'
+require_relative 'scripts/getmatchinfo.rb'
+require_relative 'scripts/recordmove.rb'
+
 
