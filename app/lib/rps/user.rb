@@ -19,7 +19,7 @@ module RPS
       wins = 0 
       @matches.each do |match| 
         if match.winner_id == user_id
-          win +=1
+          wins +=1
         end 
       end 
       wins 

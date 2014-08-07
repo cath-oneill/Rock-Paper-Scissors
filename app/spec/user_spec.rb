@@ -4,7 +4,7 @@ require_relative '../lib/rps/match.rb'
 describe 'RPS' do
   describe 'User' do
     before(:all) do
-      @user1 = RPS::User.new('bob', 'bob@bob')
+      @user1 = RPS::User.new('bob', 'bob@bob', )
     end
     
     describe ".initialize" do
@@ -25,33 +25,36 @@ describe 'RPS' do
         match2 = RPS::Match.new(10, 4, 4, 10.45, true, 4)
         @user1.matches << match1
         expect(@user1.matches).to eq([match1]) 
-    end
-
-    describe "#wins" do
-      xit "describes all wins for the user" do
-        match1 = RPS::Match.new(10, 8, 5, 10.30, true, 10)
-        match2 = RPS::Match.new(10, 4, 4, 10.45, true, 4)
-        @user1.matches << match1
         @user1.matches << match2
-        expect(@user1.wins).to eq(1) 
+        expect(@user1.matches.count).to eq(2) 
+      end
+    end 
+    describe "#wins" do
+      it "describes all wins for the user" do
+        @user2 = RPS::User.new('bob', 'bob@bob', password_digest=nil, profile_pic=nil, join_at=nil, 4 )
+        match3 = RPS::Match.new(10, 8, 5, 10.30, true, 10)
+        match4 = RPS::Match.new(10, 4, 4, 10.50, true, 4)
+        @user2.matches << match3
+        @user2.matches << match4
+        expect(@user2.wins).to eq(1) 
       end
     end
     describe "#all_matches" do
       it "gives all matches " do
-        expect(user1.all_matches).to eq(2) 
+        expect(@user1.all_matches).to eq(2) 
       end 
     end
 
-
     describe "#completed_matches" do
       it "returns all completed matches for the user" do
-        expect(user1.completed_matches).to eq(2)
+        expect(@user1.completed_matches).to eq(1)
       end
 
       it "returns a 0 if there are no completed matches" do
-        user2 = RPS::user.new('steve', 'stve@steve')
-        expect(user1.completed_matches).to eq(0)
+        user2 = RPS::User.new('steve', 'stve@steve')
+        expect(user2.completed_matches).to eq(0)
       end
+
 
 
     end
