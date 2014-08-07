@@ -17,6 +17,7 @@ module RPS
       elsif player == 2
         @winner_id = @player_2_id
       end
+      player
     end
 
     def completed!
