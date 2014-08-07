@@ -3,15 +3,16 @@ require 'rack-flash'
 require_relative 'lib/rps.rb'
 
 set :sessions, true
+set :bind, '0.0.0.0'
 use Rack::Flash
 
 get '/' do
-  if session['sesh_example']
-    @user = Sesh.dbi.get_user_by_username(session['sesh_example'])
+  if session['rps']
+    @user = RPS_Scripts::GetUserInfo.run(session['rps'])
     erb :index
   else #not in session
     erb :signin
-  
+  end
 end
 
 get '/signin' do
@@ -19,7 +20,7 @@ get '/signin' do
 end
 
 get '/signup' do
-  if session['sesh_example']
+  if session['rps']
     redirect to '/'
   else
     erb :signup
@@ -27,10 +28,10 @@ get '/signup' do
 end
 
 post '/signup' do
-  sign_up = Sesh::SignUp.run(params)
+  sign_up = RPS_Scripts::SignUp.run(params)
 
   if sign_up[:success?]
-    session['sesh_example'] = sign_up[:session_id]
+    session['rps'] = sign_up[:session_id]
     redirect to '/'
   else
     flash[:alert] = sign_up[:error]
@@ -39,10 +40,10 @@ post '/signup' do
 end
 
 post '/signin' do
-  sign_in = Sesh::SignIn.run(params)
+  sign_in = RPS_Scripts::SignIn.run(params)
 
   if sign_in[:success?]
-    session['sesh_example'] = sign_in[:session_id]
+    session['rps'] = sign_in[:session_id]
     redirect to '/'
   else
     flash[:alert] = sign_in[:error]
@@ -52,18 +53,22 @@ end
 
 get '/signout' do
   session.clear
-  redirect to '/'
+  redirect to '/signin'
 end
 
-get '/play/:match_id' do
-  #check for current round and get out of db or create
-  @current_round = #access database stuff
+get '/play/:user_id/:match_id/:round_id/' do
+  @current_match = get_match_by_id(params['match_id'])
+  @rounds = get_rounds_by_match_id(params['match_id'])
+  @unfinished_round = @rounds.find_if {|r| r.round_info[:result].nil?}
   erb :play
 end
 
-post '/play/:match_id/:move' do
-  #save that stuff in the db
-
+post '/play/:user_id/:match_id/:round_id/:move' do
+  @current_match = get_match_by_id(params['match_id'])
+  @rounds = get_rounds_by_match_id(params['match_id'])
+  @unfinished_round = @rounds.find_if {|r| r.round_info[:result].nil?}
+  @unfinished_round.player_1_move!(params['player_1_move'])
+  erb :feedback
 end
 
 get '/players' do
@@ -79,15 +84,22 @@ get '/newmatch/:user_id' do
   redirect '/play/:match_id'
 end
 
+get '/feedback' do
+  erb :feedback
+end
+
 get '/stats' do
   #get all matches and all rounds out of db
   erb :stats
 end
 
 get '/editprofile' do
-
+  erb :editprofile
 end
 
+post '/updateprofile' do
+
+end
 
 
 

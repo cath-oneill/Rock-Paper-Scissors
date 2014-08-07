@@ -43,33 +43,46 @@ module DBI
     #
     # Method to create a user record
     #
-    def save_user(name, password_digest, email, profile_pic)
+    def save_user(name, email, password_digest, profile_pic)
       @db.exec(%q[
-        INSERT INTO users (name, password_digest, email, profile_pic)
+        INSERT INTO users (name, email, password_digest, profile_pic)
         VALUES ($1, $2, $3, $4);
-      ], [name, password_digest, email, profile_pic])
+      ], [name,  email, password_digest, profile_pic])
     end
 
 
     def build_user(data)
-     User.new(data["name"], data["password_digest"], data["email"], data["profile_pic"], data["join_at"], data["user_id"])
+     User.new(data["name"], data["email"], data["password_digest"], data["profile_pic"], data["join_at"], data["user_id"])
     end
  
 
-
+    ## FOR USE WHEN LOGGING IN
     def get_user_by_email(this_email)
       response = @db.exec("SELECT * FROM users WHERE email = '#{this_email}'")
-      response.map {|row| build_user(row)}
+      user_data = response.first
+      user_data ? build_user(user_data) : nil
     end
 
+    def user_exists?(this_email)
+      result = @db.exec(%Q[
+        SELECT * FROM users WHERE email = '#{this_email}';
+      ])
+      if result.count > 1
+        true
+      else
+        false
+      end
+    end
+
+    ## FOR USE IN GAME PLAY
     def get_user_by_id(this_id)
       response = @db.exec("SELECT * FROM users WHERE user_id = '#{this_id}'")
-      response.map {|row| build_user(row)}
+      response.first
     end
 
+    #FOR USE IN PLAYERS PAGE
     def get_all_users
-      response = @db.exec("SELECT * FROM users")
-      response.map {|row| build_user(row)}
+      response = @db.exec("SELECT name user_id profile_pic FROM users")
     end
 
   # Method to create a match record
@@ -85,34 +98,24 @@ module DBI
       Match.new(data["player_1_id"], data["player_2_id"], data["match_id"], data["start_at"], data["completed"], data["winner_id"])
     end
     
-    def get_matches_by_id(this_id)
+    def get_match_by_id(this_id)
       response = @db.exec("SELECT * FROM matches WHERE match_id = '#{this_id}'")
-      response.map {|row| build_user(row)}
+      build_match(response.first)
     end
 
-    def get_finished_matches_by_id(this_id)
-      response = @db.exec("SELECT * FROM matches WHERE match_id = '#{this_id}' AND completed = 't'")
-      response.map {|row| build_user(row)}
+    def get_matches_by_player(user_id)
+      response = @db.exec("SELECT * FROM matches WHERE player_1_id = '#{user_id}' OR player_2_id = '#{user_id}'")
+      response.map {|row| build_match(row)}
     end
 
-    def get_unfinished_matches_by_id(this_id)
-      response = @db.exec("SELECT * FROM matches WHERE match_id = '#{this_id}' AND completed = 'f'")
-      response.map {|row| build_user(row)}
-    end
-
-    def get_match_by_player(this_id)
-      response = @db.exec("SELECT * FROM matches WHERE player_1_id = '#{this_id}' OR player_2_id = '#{this_id}'")
-      response.map {|row| build_user(row)}
-    end
-
-    def get_match_by_winner(this_id)
-      response = @db.exec("SELECT * FROM matches WHERE winner_id = '#{this_id}'")
-      response.map {|row| build_user(row)}
+    def get_matches_by_winner(user_id)
+      response = @db.exec("SELECT * FROM matches WHERE winner_id = '#{user_id}'")
+      response.map {|row| build_match(row)}
     end
 
     def get_all_matches
       response = @db.exec("SELECT * FROM matches")
-      response.map {|row| build_user(row)}
+      response.map {|row| build_match(row)}
     end
 
 
@@ -133,7 +136,8 @@ module DBI
       response.map {|row| build_user(row)}
     end
 
-    def get_round_by_match_id(this_id)
+    #used by 
+    def get_rounds_by_match_id(this_id)
       response = @db.exec("SELECT * FROM rounds WHERE match_id = '#{this_id}'")
       response.map {|row| build_user(row)}
     end
