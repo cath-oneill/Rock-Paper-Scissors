@@ -1,12 +1,18 @@
 module RPS
   class GetUserInfo
-    def self.run(params)
-        current_user = RPS::DBI.dbi.get_user_by_email(session['rps'])
-        current_user.matches = RPS::DBI.dbi.get_matches_by_player(current_user.user_id)
-        current_user.matches each do |m|
-          match.rounds = RPS::DBI.dbi.get_rounds_by_match_id(m.match_id)
+    def self.run(email)
+      p email
+        current_user = RPS::DBI.dbi.get_user_by_email(email)
+        p current_user
+        RPS::DBI.dbi.get_matches_by_player(current_user.user_id).each do |m|
+          current_user.matches << m
         end
-        session['rps'] ? current_user : nil
+        current_user.matches.each do |m|
+          RPS::DBI.dbi.get_rounds_by_match_id(m.match_id).each do |r|
+            m.rounds << r 
+          end
+        end
+        current_user
     end
   end
 end

@@ -149,7 +149,7 @@ module RPS
     end
   
     def self.dbi
-      @__db_instance ||= RPS.new
+      @__db_instance ||= DBI.new
     end
   end
 
