@@ -66,10 +66,7 @@ get '/play/:match_id/:round_id' do
 end
 
 post '/play/:match_id/:round_id/:move' do
-  @current_match = get_match_by_id(params['match_id'])
-  @rounds = get_rounds_by_match_id(params['match_id'])
-  @unfinished_round = @rounds.find_if {|r| r.round_info[:result].nil?}
-  @unfinished_round.player_1_move!(params['player_1_move'])
+  @feedback = RPS::RecordMove.run(session['rps'], params['match_id'], params['round_id'], params['move'])
   erb :feedback
 end
 
@@ -84,9 +81,6 @@ get '/newmatch/:opponent_id' do
   erb :play
 end
 
-get '/feedback/:opponent_id/:match_id/:round_id' do
-  erb :feedback
-end
 
 get '/stats' do
   #get all matches and all rounds out of db

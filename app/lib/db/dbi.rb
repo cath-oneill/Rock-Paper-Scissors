@@ -135,19 +135,19 @@ module RPS
     end
 
     def get_round_by_match_and_round_id(this_match_id, this_round_id)
-      response = @db.exec("SELECT * FROM rounds WHERE round_id = '#{this_id}'")
-      response.map {|row| build_user(row)}
+      response = @db.exec("SELECT * FROM rounds WHERE round_id = '#{this_round_id}' AND match_id = '#{this_match_id}")
+      build_round(response.first)
     end
 
     #used by 
     def get_rounds_by_match_id(this_id)
       response = @db.exec("SELECT * FROM rounds WHERE match_id = '#{this_id}'")
-      response.map {|row| build_user(row)}
+      response.map {|row| build_round(row)}
     end
 
     def get_all_rounds
       response = @db.exec("SELECT * FROM rounds")
-      response.map {|row| build_user(row)}
+      response.map {|row| build_round(row)}
     end
   
     def self.dbi

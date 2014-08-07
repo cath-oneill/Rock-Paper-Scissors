@@ -17,6 +17,7 @@ module RPS
       elsif player == 2
         @winner_id = @player_2_id
       end
+      player
     end
 
     def completed!
@@ -33,7 +34,9 @@ module RPS
       if player1 == 3 || player2 == 3
         @completed = true  
         winner(1) if player1 == 3
-        winner(2) if player2 == 3         
+        winner(2) if player2 == 3
+      else
+        false
       end       
     end 
 
