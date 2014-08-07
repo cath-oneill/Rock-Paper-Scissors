@@ -22,6 +22,23 @@ module RPS
         another_round = RPS::DBI.dbi.save_round(another_round)
       end
 
+      if !result.nil?
+        RPS::DBI.dbi.update_result(this_round)
+      end
+
+      if !this_round.player_1_move.nil?
+        RPS::DBI.dbi.update_player_1_move(this_round)
+      end
+
+      if !this_round.player_2_move.nil?
+        RPS::DBI.dbi.update_player_2_move(this_round)
+      end
+
+      if match_completed == true
+        RPS::DBI.dbi.update_match(this_match)
+      end
+      
+
       if result == nil
         this_message = "waiting for opponent"
       elsif result == 0
@@ -36,18 +53,6 @@ module RPS
         this_message = "you won the match"
       elsif match_completed != player_position
         this_message = "you lost the match"
-      end
-      
-      if !result.nil?
-        RPS::DBI.dbi.update_result(this_round)
-      end
-
-      if !this_round.player_1_move.nil?
-        RPS::DBI.dbi.update_player_1_move(this_round)
-      end
-
-      if !this_round.player_2_move.nil?
-        RPS::DBI.dbi.update_player_2_move(this_round)
       end
 
       this_message

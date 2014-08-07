@@ -11,7 +11,7 @@
 		<p>CURRENT WINS: <%= match[:current_wins] %> </p>
 		<p>CURRENT LOSSES: <%= match[:current_losses] %> </p>
 		<p>CURRENT TIES: <%= match[:current_ties] %> </p>
-		<% if this_match[:already_played] %>
+		<% if match[:already_played] %>
 		<p>You've already played this round.  Waiting for your opponent!</p>
 		<% else %>
 		<input type="submit" class="button" value = "PLAY THIS MATCH!">
