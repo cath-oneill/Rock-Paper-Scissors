@@ -53,7 +53,7 @@ module RPS
 
 
     def build_user(data)
-     RPS::User.new(data["name"], data["email"], data["password_digest"], data["profile_pic"], data["join_at"], data["user_id"])
+      RPS::User.new(data["name"], data["email"], data["password_digest"], data["profile_pic"], data["join_at"], data["user_id"])
     end
  
 
@@ -108,7 +108,12 @@ module RPS
     end
 
     def build_match(data)
-      RPS::Match.new(data["player_1_id"], data["player_2_id"], data["match_id"], data["start_at"], data["completed"], data["winner_id"])
+      if data["completed"] == 't'
+        completed = true
+      elsif data["completed"] = 'f'
+        completed = false
+      end
+      RPS::Match.new(data["player_1_id"], data["player_2_id"], data["match_id"], data["start_at"], completed, data["winner_id"])
     end
     
     def get_match_by_id(this_id)
