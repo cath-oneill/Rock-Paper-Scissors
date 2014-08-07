@@ -17,25 +17,24 @@ module RPS
       elsif player == 2
         @winner_id = @player_2_id
       end
-      player
     end
 
     def completed!
       player1 = 0
       player2 = 0
       @rounds.each do |round|
-        res = round.round_info[:result]
+        res = round.result
         if res == 1 
           player1 +=1
         elsif res == 2
           player2 +=1
         end 
       end
-      if player1 == 3 || player2 == 3
+      if player1 >= 3 || player2 >= 3
         @completed = true  
-        winner(1) if player1 == 3
-        winner(2) if player2 == 3
-        return true 
+        winner(1) if player1 >= 3
+        winner(2) if player2 >= 3
+        return true
       else
         return false
       end       

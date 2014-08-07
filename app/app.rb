@@ -10,6 +10,8 @@ get '/' do
   if session['rps']
     @user = RPS::GetUserInfo.run(session['rps'])
     @match_info = RPS::GetMatchInfo.run(@user)
+    p @user
+    p @match_info
     erb :index
   else #not in session
     erb :signin

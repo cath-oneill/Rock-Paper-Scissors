@@ -102,7 +102,7 @@ module RPS
 
     def update_match(this_match)
       @db.exec(%Q[
-        UPDATE rounds SET completed = '#{this_match.completed}', winner_id = '#{this_match.winner_id}'
+        UPDATE matches SET completed = '#{this_match.completed}', winner_id = '#{this_match.winner_id}'
         WHERE match_id = '#{this_match.match_id}';   
       ])
     end
