@@ -14,16 +14,18 @@ module RPS
         this_round.player_2_move!(this_move)
       end
 
-      result = this_round.result
+      result = this_round.result      
       match_completed = this_match.completed!
-      
-      if match_completed == 1 || 2
+            
+      if !result.nil?
         another_round = RPS::Round.new(this_match_id, this_match.new_round_id)
         another_round = RPS::DBI.dbi.save_round(another_round)
       end
 
-      if result == 0
+      if result == nil
         this_message = "waiting for opponent"
+      elsif result == 0
+        this_message = "tied round"
       elsif !match_completed 
         if result == player_position 
           this_message = "you won the round"
@@ -35,7 +37,19 @@ module RPS
       elsif match_completed != player_position
         this_message = "you lost the match"
       end
-      ## UPDATE ROUND AND MATCH
+      
+      if !result.nil?
+        RPS::DBI.dbi.update_result(this_round)
+      end
+
+      if !this_round.player_1_move.nil?
+        RPS::DBI.dbi.update_player_1_move(this_round)
+      end
+
+      if !this_round.player_2_move.nil?
+        RPS::DBI.dbi.update_player_2_move(this_round)
+      end
+
       this_message
     end
   end

@@ -19,7 +19,7 @@ module RPS
           opponent = x.player_2_id
           this_match[:current_losses] = x.rounds.select{|x| x.round_info[:result] ==2}.length
         elsif player_number == 2
-          opponent = this_match.player_1_id
+          opponent = x.player_1_id
           this_match[:current_losses] = x.rounds.select{|x| x.round_info[:result] == 1}.length
         end
         this_match[:opponent_id] = opponent

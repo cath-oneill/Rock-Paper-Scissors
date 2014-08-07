@@ -138,6 +138,27 @@ module RPS
       RPS::Round.new(data["match_id"], data["round_id"], data["player_1_move"], data["player_2_move"], data["result"])
     end
 
+    def update_player_1_move(this_round)
+      @db.exec(%Q[
+        UPDATE rounds SET player_1_move = '#{this_round.player_1_move}' 
+        WHERE match_id = '#{this_round.match_id}' AND round_id = '#{this_round.round_id}';
+      ])     
+    end
+
+    def update_player_2_move(this_round)
+      @db.exec(%Q[
+        UPDATE rounds SET player_2_move = '#{this_round.player_2_move}'
+        WHERE match_id = '#{this_round.match_id}' AND round_id = '#{this_round.round_id}';
+      ])     
+    end
+
+    def update_result(this_round)
+      @db.exec(%Q[
+        UPDATE rounds SET result = '#{this_round.result}'
+        WHERE match_id = '#{this_round.match_id}' AND round_id = '#{this_round.round_id}';
+      ])     
+    end
+
     def get_round_by_match_and_round_id(this_match_id, this_round_id)
       response = @db.exec("SELECT * FROM rounds WHERE round_id = '#{this_round_id}' AND match_id = '#{this_match_id}")
       build_round(response.first)

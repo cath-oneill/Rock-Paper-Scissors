@@ -1,6 +1,6 @@
 module RPS
   class Round
-    attr_reader :match_id, :round_id
+    attr_reader :match_id, :round_id, :player_1_move, :player_2_move, :result
     def initialize(match_id, round_id, player_1_move = nil, player_2_move = nil, result=nil)
       @match_id = match_id
       @round_id = round_id
