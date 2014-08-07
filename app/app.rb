@@ -84,7 +84,8 @@ end
 
 
 get '/stats' do
-  #get all matches and all rounds out of db
+  @user = RPS::GetUserInfo.run(session['rps'])
+  @match_info = RPS::GetMatchInfo.run(@user)
   erb :stats
 end
 
@@ -92,7 +93,7 @@ get '/editprofile' do
   erb :editprofile
 end
 
-post '/updateprofile' do
+post '/editprofile' do
 
 end
 
