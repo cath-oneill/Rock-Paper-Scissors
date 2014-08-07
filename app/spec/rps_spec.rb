@@ -1,9 +1,9 @@
 require_relative '../lib/rps/round.rb'
 
-describe 'RPS_Logic' do
+describe 'RPS' do
   describe 'Round' do
     before(:all) do
-      @round1 = RPS_Logic::Round.new(5, 3)
+      @round1 = RPS::Round.new(5, 3)
     end
     
     describe ".initialize" do
@@ -51,7 +51,7 @@ describe 'RPS_Logic' do
       end
 
       it "returns nil if the round is not complete" do
-        round2 = RPS_Logic::Round.new(8,2)
+        round2 = RPS::Round.new(8,2)
         round2.player_1_move!('r')
         result = round2.round_info[:result]
         expect(result).to be_nil

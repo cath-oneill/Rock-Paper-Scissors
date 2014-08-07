@@ -1,10 +1,10 @@
 require_relative '../lib/rps/user.rb'
 require_relative '../lib/rps/match.rb'
 
-describe 'RPS_Logic' do
+describe 'RPS' do
   describe 'User' do
     before(:all) do
-      @user1 = RPS_Logic::user.new('bob', 'bob@bob')
+      @user1 = RPS::user.new('bob', 'bob@bob')
     end
     
     describe ".initialize" do
@@ -24,8 +24,8 @@ describe 'RPS_Logic' do
 
     describe "#wins" do
       it "describes all wins for the user" do
-        @match1 = RPS_Logic::Match.new(10, 8, 5, 10.30, true, 10)
-        @match2 = RPS_Logic::Match.new(10, 4, 4, 10.45, true, 4)
+        @match1 = RPS::Match.new(10, 8, 5, 10.30, true, 10)
+        @match2 = RPS::Match.new(10, 4, 4, 10.45, true, 4)
         @matches = [@match1, @match2]
         expect(@use1.wins).to eq(1) 
       end
@@ -43,7 +43,7 @@ describe 'RPS_Logic' do
       end
 
       it "returns a 0 if there are no completed matches" do
-        user2 = RPS_Logic::user.new('steve', 'stve@steve')
+        user2 = RPS::user.new('steve', 'stve@steve')
         expect(user1.completed_matches).to eq(0)
       end
 

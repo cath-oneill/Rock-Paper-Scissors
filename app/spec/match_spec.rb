@@ -1,9 +1,9 @@
 require_relative '../lib/rps/match.rb'
 
-describe 'RPS_Logic' do
+describe 'RPS' do
   describe 'Match' do
     before(:all) do
-      @match1 = RPS_Logic::Match.new(10, 8)
+      @match1 = RPS::Match.new(10, 8)
     end
     
     describe ".initialize" do
@@ -27,7 +27,7 @@ describe 'RPS_Logic' do
     end
     describe ".winner" do
       it "gives nil if player is 4 " do
-        match2 = RPS_Logic::Match.new(10, 8)
+        match2 = RPS::Match.new(10, 8)
         match2.winner(4)
         expect(match2.winner_id).to be_nil 
       end 
