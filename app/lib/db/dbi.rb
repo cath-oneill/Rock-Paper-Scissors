@@ -100,6 +100,13 @@ module RPS
       ], [this_match.player_1_id, this_match.player_2_id])
     end
 
+    def update_match(this_match)
+      @db.exec(%Q[
+        UPDATE rounds SET completed = '#{this_match.completed}', winner_id = '#{this_match.winner_id}'
+        WHERE match_id = '#{this_match.match_id}';   
+      ])
+    end
+
     def build_match(data)
       RPS::Match.new(data["player_1_id"], data["player_2_id"], data["match_id"], data["start_at"], data["completed"], data["winner_id"])
     end

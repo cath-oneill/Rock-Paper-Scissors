@@ -1,3 +1,5 @@
+require 'pry-byebug'
+
 module RPS
   class GetUserInfo
     def self.run(user_id)
@@ -10,6 +12,7 @@ module RPS
             m.rounds << r 
           end
         end
+        # binding.pry
         current_user
     end
   end
