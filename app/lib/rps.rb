@@ -10,3 +10,5 @@ require_relative 'rps/match.rb'
 require_relative 'scripts/signup.rb'
 require_relative 'scripts/signin.rb'
 require_relative 'scripts/getuserinfo.rb'
+require_relative 'scripts/createnewmatch.rb'
+

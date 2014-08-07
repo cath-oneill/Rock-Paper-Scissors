@@ -14,7 +14,7 @@ module RPS
 
       {
         :success? => true,
-        :session_id => user.email
+        :session_id => user.user_id
       }
     end
   end

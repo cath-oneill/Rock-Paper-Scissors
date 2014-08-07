@@ -1,9 +1,7 @@
 module RPS
   class GetUserInfo
-    def self.run(email)
-      p email
-        current_user = RPS::DBI.dbi.get_user_by_email(email)
-        p current_user
+    def self.run(user_id)
+        current_user = RPS::DBI.dbi.get_user_by_id(user_id)
         RPS::DBI.dbi.get_matches_by_player(current_user.user_id).each do |m|
           current_user.matches << m
         end

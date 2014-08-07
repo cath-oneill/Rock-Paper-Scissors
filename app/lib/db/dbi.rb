@@ -78,7 +78,7 @@ module RPS
     ## FOR USE IN GAME PLAY
     def get_user_by_id(this_id)
       response = @db.exec("SELECT * FROM users WHERE user_id = '#{this_id}'")
-      response.first
+      build_user(response.first)
     end
 
     #FOR USE IN PLAYERS PAGE
@@ -88,11 +88,12 @@ module RPS
 
   # Method to create a match record
     #
-    def save_match(player_1_id, player_2_id)
+    def save_match(this_match)
       @db.exec(%q[
-        INSERT INTO users (player_1_id, player_2_id)
-        VALUES ($1, $2);
-      ], [player_1_id, player_2_id])
+        INSERT INTO matches (player_1_id, player_2_id)
+        VALUES ($1, $2)
+        RETURNING *;
+      ], [this_match.player_1_id, this_match.player_2_id])
     end
 
     def build_match(data)
@@ -121,18 +122,19 @@ module RPS
 
 
   # Method to create a round record
-    def save_round(round_id, match_id)
+    def save_round(this_round)
       @db.exec(%q[
         INSERT INTO rounds (round_id, match_id)
-        VALUES ($1, $2);
-      ], [round_id, match_id])
+        VALUES ($1, $2)
+        RETURNING *;
+      ], [this_round.round_id, this_round.match_id])
     end
 
     def build_round(data)
       RPS::Round.new(data["match_id"], data["round_id"], data["player_1_move"], data["player_2_move"], data["result"])
     end
 
-    def get_round_by_id(this_id)
+    def get_round_by_match_and_round_id(this_match_id, this_round_id)
       response = @db.exec("SELECT * FROM rounds WHERE round_id = '#{this_id}'")
       response.map {|row| build_user(row)}
     end

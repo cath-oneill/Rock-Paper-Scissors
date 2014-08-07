@@ -56,14 +56,16 @@ get '/signout' do
   redirect to '/signin'
 end
 
-get '/play/:user_id/:match_id/:round_id/' do
-  @current_match = get_match_by_id(params['match_id'])
-  @rounds = get_rounds_by_match_id(params['match_id'])
-  @unfinished_round = @rounds.find_if {|r| r.round_info[:result].nil?}
+get '/play/:match_id/:round_id' do
+  @user = RPS::GetUserInfo.run(session['rps'])
+  @game_info = {
+    match_id: params['match_id'],
+    round_id: params['round_id']
+  }
   erb :play
 end
 
-post '/play/:user_id/:match_id/:round_id/:move' do
+post '/play/:match_id/:round_id/:move' do
   @current_match = get_match_by_id(params['match_id'])
   @rounds = get_rounds_by_match_id(params['match_id'])
   @unfinished_round = @rounds.find_if {|r| r.round_info[:result].nil?}
@@ -76,15 +78,13 @@ get '/players' do
   erb :players
 end
 
-get '/newmatch/:other_user_id' do
-  #create a new match (@user and our user_id that was just passed)
-  #stick in DB
-  #get back out and recreate
-
-  redirect '/play/:user_id/:match_id/:round_id'
+get '/newmatch/:opponent_id' do
+  @game_info = RPS::CreateNewMatch.run(session['rps'], params['opponent_id'])
+  @user = RPS::GetUserInfo.run(session['rps'])
+  erb :play
 end
 
-get '/feedback/:user_id/:match_id/:round_id' do
+get '/feedback/:opponent_id/:match_id/:round_id' do
   erb :feedback
 end
 
