@@ -1,13 +1,13 @@
 require 'digest/sha1'
 
-module RPS_Logic
+module RPS
   class User
-    attr_reader :name, :profile_picture, :user_id, :join_at
-    def initialize(name, email, password_digest=nil, profile_picture=nil, join_at=nil, user_id=nil)
+    attr_reader :name, :profile_pic, :user_id, :password_digest, :email, :join_at
+    def initialize(name, email, password_digest=nil, profile_pic=nil, join_at=nil, user_id=nil)
       @name = name
       @email = email
       @password_digest = password_digest
-      @profile_picture = profile_picture
+      @profile_pic = profile_pic
       @join_at = join_at
       @user_id = user_id
       @matches = []

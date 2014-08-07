@@ -8,7 +8,7 @@ use Rack::Flash
 
 get '/' do
   if session['rps']
-    @user = RPS_Scripts::GetUserInfo.run(session['rps'])
+    @user = RPS::GetUserInfo.run(session['rps'])
     erb :index
   else #not in session
     erb :signin
@@ -28,7 +28,7 @@ get '/signup' do
 end
 
 post '/signup' do
-  sign_up = RPS_Scripts::SignUp.run(params)
+  sign_up = RPS::SignUp.run(params)
 
   if sign_up[:success?]
     session['rps'] = sign_up[:session_id]
@@ -40,7 +40,7 @@ post '/signup' do
 end
 
 post '/signin' do
-  sign_in = RPS_Scripts::SignIn.run(params)
+  sign_in = RPS::SignIn.run(params)
 
   if sign_in[:success?]
     session['rps'] = sign_in[:session_id]
@@ -76,15 +76,15 @@ get '/players' do
   erb :players
 end
 
-get '/newmatch/:user_id' do
+get '/newmatch/:other_user_id' do
   #create a new match (@user and our user_id that was just passed)
   #stick in DB
   #get back out and recreate
 
-  redirect '/play/:match_id'
+  redirect '/play/:user_id/:match_id/:round_id'
 end
 
-get '/feedback' do
+get '/feedback/:user_id/:match_id/:round_id' do
   erb :feedback
 end
 

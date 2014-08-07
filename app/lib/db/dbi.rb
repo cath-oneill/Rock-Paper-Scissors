@@ -1,10 +1,11 @@
 require 'pg'
 require 'pry-byebug'
 
-module DBI
-  class RPS
+module RPS
+  class DBI
     def initialize
       @db = PG.connect(host: 'localhost', dbname: 'rps')
+      build_tables
     end    
 
     # these methods create the tables in your db if they
@@ -43,16 +44,16 @@ module DBI
     #
     # Method to create a user record
     #
-    def save_user(name, email, password_digest, profile_pic)
+    def save_user(user)
       @db.exec(%q[
         INSERT INTO users (name, email, password_digest, profile_pic)
         VALUES ($1, $2, $3, $4);
-      ], [name,  email, password_digest, profile_pic])
+      ], [user.name,  user.email, user.password_digest, user.profile_pic])
     end
 
 
     def build_user(data)
-     User.new(data["name"], data["email"], data["password_digest"], data["profile_pic"], data["join_at"], data["user_id"])
+     RPS::User.new(data["name"], data["email"], data["password_digest"], data["profile_pic"], data["join_at"], data["user_id"])
     end
  
 
@@ -95,7 +96,7 @@ module DBI
     end
 
     def build_match(data)
-      Match.new(data["player_1_id"], data["player_2_id"], data["match_id"], data["start_at"], data["completed"], data["winner_id"])
+      RPS::Match.new(data["player_1_id"], data["player_2_id"], data["match_id"], data["start_at"], data["completed"], data["winner_id"])
     end
     
     def get_match_by_id(this_id)
@@ -128,7 +129,7 @@ module DBI
     end
 
     def build_round(data)
-      Round.new(data["match_id"], data["round_id"], data["player_1_move"], data["player_2_move"], data["result"])
+      RPS::Round.new(data["match_id"], data["round_id"], data["player_1_move"], data["player_2_move"], data["result"])
     end
 
     def get_round_by_id(this_id)

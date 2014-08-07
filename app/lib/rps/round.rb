@@ -1,4 +1,4 @@
-module RPS_Logic
+module RPS
   class Round
     attr_reader :match_id, :round_id
     def initialize(match_id, round_id, player_1_move = nil, player_2_move = nil, result=nil)

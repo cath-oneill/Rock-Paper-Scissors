@@ -1,0 +1,18 @@
+<html>
+<head>
+  <title>Rock, Paper, Scissors</title>
+  <link rel="stylesheet" href="http://cdn.foundation5.zurb.com/foundation.css">  
+  <style type="text/css">
+  </style>
+</head>
+<body>
+	<% if session['rps']%>
+		<%= erb :_header %>
+	<% end %>
+<hr>
+<%= yield %>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+</body>
+</html>
