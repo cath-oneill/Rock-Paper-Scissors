@@ -22,7 +22,7 @@ end
 
 get '/signup' do
   if session['rps']
-    redirect to '/'
+    redirect to '/players'
   else
     erb :signup
   end

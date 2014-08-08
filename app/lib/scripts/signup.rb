@@ -9,7 +9,8 @@ module RPS
         return {:success? => false, :error => "PASSWORDS DONT MATCH"}
       end
 
-      user = RPS::User.new(params['screenname'], params['email'])
+      email = params['email'].downcase.strip #need for Gravatar
+      user = RPS::User.new(params['screenname'], email)
       user.update_password(params['password'])
       RPS::DBI.dbi.save_user(user)
       

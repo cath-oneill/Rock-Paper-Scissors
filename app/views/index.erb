@@ -1,5 +1,9 @@
 <br>
 <div class="row">
+	<% if @match_info.empty? %>
+		<br>	
+		<h4 class="columns small-10 small-centered">You don't have any games started yet! <a href="/players">Challenge</a> another player to a match.</h4>
+	<% end %>
 	<!-- FIRST: List current games... -->
 	<% @match_info.each do |match| %>
 		<% if match[:completed] == false && match[:already_played] == false %>
