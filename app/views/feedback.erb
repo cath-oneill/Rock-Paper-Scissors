@@ -1,1 +1,31 @@
-<h2><%= @feedback %></h2>
+<br>
+
+<div class = "row panel">
+		
+
+<h4 class="text-center"><%= @feedback %></h4>
+	<div class = "columns small-6 small-centered">
+
+<% if @feedback = "WAITING FOR OPPONENT" %>
+<a href="http://www.gifbin.com/984608"><img src="http://gifs.gifbin.com/092010/1284123417_cat-crawls-in-vase.gif" alt="funny gifs" /></a>
+<% elsif @feedback = "TIED ROUND" %>
+<a href="http://www.gifbin.com/984876"><img src="http://gifs.gifbin.com/122010/1291751719_kid-drinking-water-from-hose-fail.gif" alt="funny gifs" /></a>
+<% elsif @feedback = "YOU WON THIS ROUND!" %>
+<a href="http://www.gifbin.com/984796"><img src="http://gifs.gifbin.com/112010/1289238789_middle-school-football-trick-play.gif" alt="funny gifs" /></a>
+<% elsif @feedback = "YOU LOST THIS ROUND." %>
+<a href="http://www.gifbin.com/983424"><img src="http://gifs.gifbin.com/092009/1253449365_cat-on-slide.gif" alt="funny gifs" /></a>
+<% elsif @feedback = "YOU WON THE MATCH!" %>
+<a href="http://www.gifbin.com/988227"><img src="http://gifs.gifbin.com/022014/1392140393_paul.gif" alt="funny gifs" /></a>
+<% elsif @feedback = "YOU LOST THE MATCH." %>
+<a href="http://www.gifbin.com/986457"><img src="http://gifs.gifbin.com/032012/1331575577_puppy_tips_over_while_eating.gif" alt="funny gifs" /></a>
+<% end %>
+
+	</div>
+</div>
+
+<br>
+<a href="/players"><button class="button expand">START A NEW MATCH!</button> </a>
+<br>
+<a href="/"><button class = "button expand">RETURN TO HOME SCREEN</button></a>
+<br>
+<a href="/stats"><button class = "button expand">VIEW YOUR STATS</button></a>
