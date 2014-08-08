@@ -94,7 +94,7 @@ get '/editprofile' do
 end
 
 post '/editprofile' do
-
+  redirect to '/'
 end
 
 

@@ -1,9 +1,11 @@
 <div class="row">
   <h2>Welcome! </h2>
-    You are signed in as <%= @user.name %><br /><br />
+    <h1> You are signed in as <%= @user.name %></h1><br /><br />
 	<% @match_info.each do |match| %>
 	<div class="columns large-12 panel">
     <form class="row" method = "get" action="/play/<%= match[:match_id] %>/<%= match[:current_round] %>">
+
+
 		<p>MATCH NUMBER: <%= match[:match_id] %></p>
 		<p>OPPONENT: <%= match[:opponent_name] %>, <%= match[:opponent_id] %></p>
 		<a href="/play/"><p>PLAY ROUND # <%= match[:current_round] %> NOW! </p></a>
@@ -12,8 +14,9 @@
 		<p>CURRENT TIES: <%= match[:current_ties] %> </p>
 		<% if  match[:completed] == true %>
 		<p>GAME OVER!</p>
+
 		<% elsif match[:already_played] == true %>
-		<p>You've already played this round.  Waiting for your opponent!</p>
+		<h3>You've already played this round.  Waiting for your opponent!</h3>
 		<% else %>
 		<input type="submit" class="button" value = "PLAY THIS MATCH!">
 		<% end %>

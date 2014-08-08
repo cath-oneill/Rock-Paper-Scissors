@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="columns large-12">
+    <p>Hello <%= @user.name %>!</p>
+    <div class="row">
+    <form class="columns large-3" method="post" action="/stats/">
+    <br>Your total wins are <%= @user.wins %></br> 
+    <br>The total matches you played are <%= @user.all_matches %></br> 
+    <br> All the matches you completed are  <%= @user.completed_matches %></br>
+    <br> You won this percentage of the matches <%= @user.wins_percentage %></br>  
+
+
+    </form>    
+    </div>
+  </div>
+</div>
