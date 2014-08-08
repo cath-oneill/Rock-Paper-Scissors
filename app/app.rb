@@ -67,13 +67,14 @@ get '/play/:match_id/:round_id' do
 end
 
 post '/play/:match_id/:round_id/:move' do
+  @user = RPS::GetUserInfo.run(session['rps'])
   @feedback = RPS::RecordMove.run(session['rps'], params['match_id'], params['round_id'], params['move'])
   erb :feedback
 end
 
 get '/players' do
   @user = RPS::GetUserInfo.run(session['rps'])
-  @all_users = RPS::DBI.dbi.get_all_users
+  @all_users = RPS::DBI.dbi.get_all_profile_info
   erb :players
 end
 
@@ -91,6 +92,7 @@ get '/stats' do
 end
 
 get '/editprofile' do
+  @user = RPS::GetUserInfo.run(session['rps'])
   RPS::EditProfile.run(params)
   erb :editprofile
 end

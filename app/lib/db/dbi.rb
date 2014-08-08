@@ -86,14 +86,11 @@ module RPS
       get_user_by_id(this_id).name
     end
     #FOR USE IN PLAYERS PAGE
-    def get_all_users
+    def get_all_profile_info
       response = @db.exec("SELECT name, user_id, profile_pic FROM users;")
-      response.each {|row| limited_build_user(row)}
+      response.map {|row| {name: row["name"], user_id: row["user_id"], profile_pic: row["profile_pic"]}}
     end
 
-    def limited_build_user(data)
-      RPS::User.new(data["name"], nil, nil, data["profile_pic"], nil, data["user_id"])
-    end
   # Method to create a match record
     #
     def save_match(this_match)

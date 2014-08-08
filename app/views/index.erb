@@ -1,6 +1,5 @@
 <div class="row">
   <h2>Welcome! </h2>
-    <h1> You are signed in as <%= @user.name %></h1><br /><br />
 	<% @match_info.each do |match| %>
 	<div class="columns large-12 panel">
     <form class="row" method = "get" action="/play/<%= match[:match_id] %>/<%= match[:current_round] %>">
