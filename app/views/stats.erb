@@ -1,15 +1,33 @@
 <div class="row">
   <div class="columns large-12">
-    <p>Hello <%= @user.name %>!</p>
-    <div class="row">
-    <form class="columns large-3" method="post" action="/stats/">
-    <br>Your total wins are <%= @user.wins %></br> 
-    <br>The total matches you played are <%= @user.all_matches %></br> 
-    <br> All the matches you completed are  <%= @user.completed_matches %></br>
-    <br> You won this percentage of the matches <%= @user.wins_percentage %></br>  
+    <h2><%= @user.name %> Statistics</h2>
+    <br>
+        
+        <h4>Win Percentage: <%= @user.wins_percentage %>%</h4>
+        <div class="progress success radius">
+            <span class="meter" style="width: <%= @user.wins_percentage %>%"></span>
+        </div>
+        <br>
+        <hr>
+        <br>
+        
+        <h4>Loss Percentage: <%= 100 - @user.wins_percentage %>%</h4>
+        <div class="progress radius alert">
+            <span class="meter" style="width: <%= 100 - @user.wins_percentage %>%"></span>
+        </div>
+        <br>
+        <hr>
+        <br>
+        
+        <h4>Completed Matches: <%= @user.completed_matches %></h4>
+        <h4>Total Matches: <%= @user.all_matches %></h4>
+        <br>
+        <h4>Percent of Matches Completed: <%= @user.completed_matches * 100.0/@user.all_matches %>%</h4>
+        <div class="progress radius">
+            <span class="meter" style="width: <%= @user.completed_matches * 100/@user.all_matches %>%"></span>
+        </div>
+        <br>
 
 
-    </form>    
-    </div>
   </div>
 </div>
