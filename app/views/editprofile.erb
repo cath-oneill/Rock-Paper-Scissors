@@ -1,9 +1,11 @@
 <div align="center">
-  <h2>Update your password here</h2>
-  <form action='/editprofile' method='post'>
+  <% if flash[:alert] %>
+    <%= flash[:alert] %>
+  <% end %>
+  <form action='/editpassword' method='post'>
+	<h2>Update your password:</h2>
     <input type='password' name='password' placeholder='Change Your Password'><br />
-    <input type='password' name='password_conf' placeholder='Enter New Password Again'><br />
-    <input type='submit' value='Submit'>
+    <input type='password' name='password_conf' placeholder='Verify New Password'><br />
+    <input type='submit' class="button" value='Submit'>
   </form>
-    <a href="/editprofile" class="button">Click here</a>
 </div>

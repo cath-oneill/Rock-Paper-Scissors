@@ -55,6 +55,13 @@ module RPS
     def build_user(data)
       RPS::User.new(data["name"], data["email"], data["password_digest"], data["profile_pic"], data["join_at"], data["user_id"])
     end
+
+    def update_user(this_user)
+      @db.exec(%Q[
+        UPDATE users SET password_digest = '#{this_user.password_digest}', name = '#{this_user.name}', profile_pic = '#{this_user.profile_pic}', email = '#{this_user.email}'
+        WHERE user_id = '#{this_user.user_id}';   
+      ])
+    end
  
 
     ## FOR USE WHEN LOGGING IN

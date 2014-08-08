@@ -35,7 +35,7 @@ post '/signup' do
     session['rps'] = sign_up[:session_id]
     redirect to '/'
   else
-    flash[:alert] = sign_up[:error]
+    flash.now[:alert] = sign_up[:error]
     redirect to '/sign_up'
   end
 end
@@ -47,7 +47,7 @@ post '/signin' do
     session['rps'] = sign_in[:session_id]
     redirect to '/'
   else
-    flash[:alert] = sign_in[:error]
+    flash.now[:alert] = sign_in[:error]
     redirect to '/signin'
   end
 end
@@ -93,13 +93,14 @@ end
 
 get '/editprofile' do
   @user = RPS::GetUserInfo.run(session['rps'])
-  RPS::EditProfile.run(params)
   erb :editprofile
 end
 
-post '/editprofile' do
-
-  redirect to '/'
+post '/editpassword' do
+  @user = RPS::GetUserInfo.run(session['rps'])
+  password_response = RPS::EditPassword.run(params, @user)
+  flash.now[:alert] = password_response[:message]
+  redirect to '/editprofile'
 end
 
 
