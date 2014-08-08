@@ -1,24 +1,33 @@
+<br>
 <div class="row">
-  <h2>Welcome! </h2>
 	<% @match_info.each do |match| %>
 	<div class="columns large-12 panel">
     <form class="row" method = "get" action="/play/<%= match[:match_id] %>/<%= match[:current_round] %>">
+	<div class="columns large-12">
+		<div class="row">
+		<p class = "columns large-6">OPPONENT: <%= match[:opponent_name] %></p>
 
-
-		<p>MATCH NUMBER: <%= match[:match_id] %></p>
-		<p>OPPONENT: <%= match[:opponent_name] %>, <%= match[:opponent_id] %></p>
-		<a href="/play/"><p>PLAY ROUND # <%= match[:current_round] %> NOW! </p></a>
-		<p>CURRENT WINS: <%= match[:current_wins] %> </p>
-		<p>CURRENT LOSSES: <%= match[:current_losses] %> </p>
-		<p>CURRENT TIES: <%= match[:current_ties] %> </p>
-		<% if  match[:completed] == true %>
-		<p>GAME OVER!</p>
-
+		<% if  match[:completed] == true  && match[:current_wins] >= 3%>
+		<em>GAME OVER! YOU WON!</em>
+		<% elsif  match[:completed] == true  && match[:current_wins] <= 3%>
+		<em>GAME OVER! YOU LOST!</em>
 		<% elsif match[:already_played] == true %>
-		<h3>You've already played this round.  Waiting for your opponent!</h3>
+		<em>You've already played this round.  Waiting for your opponent!</em>
 		<% else %>
 		<input type="submit" class="button" value = "PLAY THIS MATCH!">
 		<% end %>
+		</div>
+
+		<div class="row">
+			<div class="columns small-10 small-centered">
+			<ul class="small-block-grid-3">
+				<li class="panel callout">WINS: <%= match[:current_wins] %> </li>
+				<li class="panel callout">LOSSES: <%= match[:current_losses] %> </li>
+				<li class="panel callout">TIES: <%= match[:current_ties] %> </li>
+			</ul>
+			</div>
+		</div>
+	</div>
 	</form>
 	</div>
 	<% end %>
