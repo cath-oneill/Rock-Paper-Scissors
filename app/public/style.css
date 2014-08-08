@@ -1,0 +1,19 @@
+/*body {
+	background-color: yellow;
+}*/
+
+
+ .list{
+  color: yellow;
+ }
+
+ .box{
+border-width: 4px;
+border-color: black;
+ } 
+
+/* resize images */
+.header img {
+    width: 100%;
+    max-width: 400px;
+}

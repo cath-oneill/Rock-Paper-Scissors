@@ -1,37 +1,8 @@
-<style type="text/css">
- #header{
-  background-color: white;
-  color: red;
-  text-align: center;
-  margin-left: 200px;
-  font-family: Verdana;
-  font-size: 12px;
-  width: 520px;
-  height: 500px;
-}
- }
- .list{
-  color: yellow;
- }
- .box{
-border-width: 4px;
-border-color: black;
- } 
 
-/* resize images */
-.container img {
-    width: 100%;
-    height: 400px;
-}
-</style>
-<div id="header">
-  <br> </br>
- <div> <img src="http://spudcomics.com/comics/2009-01-27-dynamite.png"/></div>
-<div id="box"> 
-<ul class="list">
-    <br> <a href='/players'>Start a new match </a> </br> 
-    <br> <a href='/editprofile'>Edit your profile </a> </br> 
-    <br> <a href='/stats'>See your stats </a> </br> 
-    <br> <a href='/'>Matches Board</a> </br> 
-    <br> <a href='/signout'>Sign Out</a> </br> 
+<div class="header">
+  <h2>Rock, Paper, Scissors</h2>
+  <% if session['rps'] %>
+    <h4> You are signed in as <%= @user.name %>.</h4>
+  <% end %>
+  <img src="http://spudcomics.com/comics/2009-01-27-dynamite.png"/>
 </div>

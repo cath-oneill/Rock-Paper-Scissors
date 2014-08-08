@@ -2,17 +2,30 @@
 <head>
   <title>Rock, Paper, Scissors</title>
   <link rel="stylesheet" href="http://cdn.foundation5.zurb.com/foundation.css">  
+  <link rel="stylesheet" href="./style.css">
   <style type="text/css">
   </style>
 </head>
 <body>
 	<% if session['rps']%>
-		<%= erb :_header %>
+		<%= erb :_nav %>
 	<% end %>
+  <div class="row">
+    <div class="columns large-7">
+      <%= yield %>
+    </div>
+    <div class="columns large-5">
+      <%= erb :_header %>
+    </div>
+  </div>
 <hr>
-<%= yield %>
 
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="http://cdn.foundation5.zurb.com/foundation.js"></script>
+<script src="http://cdn.foundation5.zurb.com/foundation.topbar.js"></script>
+  <script>
+    $(document).foundation();
+  </script>
 </body>
 </html>

@@ -72,7 +72,8 @@ post '/play/:match_id/:round_id/:move' do
 end
 
 get '/players' do
-  @all_users = [{user_id: 1, name: "Bob"}]
+  @user = RPS::GetUserInfo.run(session['rps'])
+  @all_users = RPS::DBI.dbi.get_all_users
   erb :players
 end
 
@@ -90,10 +91,12 @@ get '/stats' do
 end
 
 get '/editprofile' do
+  RPS::EditProfile.run(params)
   erb :editprofile
 end
 
 post '/editprofile' do
+
   redirect to '/'
 end
 
