@@ -8,9 +8,12 @@
 		<form class="columns large-3" method="post" action="/play/<%= @game_info[:match_id] %>/<%= @game_info[:round_id] %>/p">
 			<h1><input type="submit" value="PAPER" class="button"></h1>
 		</form>
-		<form class="columns large-3 end" method="post" action="/play/<%= @game_info[:match_id] %>/<%= @game_info[:round_id] %>/s">
+		<form class="columns large-3" method="post" action="/play/<%= @game_info[:match_id] %>/<%= @game_info[:round_id] %>/s">
 			<h1><input type="submit" value="SCISSORS" class="button"></h1>
-		</form>			
+		</form>		
+		<form class="columns large-2" method="post" action="/play/<%= @game_info[:match_id] %>/<%= @game_info[:round_id] %>/R">
+			<h1><input type="submit" value="?" class="button"></h1>
+		</form>		
 		</div>
 	</div>
 </div>
