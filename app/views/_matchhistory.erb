@@ -1,4 +1,22 @@
 
+<!-- SECTION SUMMARIZING MATCH -->
+<% wins = @history.count {|r| r[:result] == "YOU WON!"} %>
+<% losses = @history.count {|r| r[:result] == "YOU LOST!"} %>
+<% ties = @history.count {|r| r[:result] == "TIED ROUND"} %>
+<div class="row">
+	<div class="columns small-12 panel callout">
+		<h3>WINS: <%= wins %></h3>
+		<h3>LOSSES: <%= losses %></h3>
+		<h3>WINS: <%= ties %></h3>
+		<% if wins==3 %>
+		<h2>MATCH OVER. YOU WON! </h3>
+		<% elsif losses==3 %>
+		<h2>MATCH OVER. YOU LOST! </h3>
+		<% end %>
+	</div>
+</div>
+
+<!-- LISTING EACH ROUND OF MATCH -->
 <% sorted = @history.sort_by {|round| round[:round_id]}.reverse  #most recent first %>
 
 <% sorted.each do |round| %>
@@ -6,22 +24,22 @@
 	<div class="columns small-12 panel">
 		
 	<% if round[:result].nil? %>
-		<p>ROUND: <%= round[:round_id] %></p>
+		<h4>ROUND: <%= round[:round_id] %></h4>
 		<% if round[:your_move].nil? %>
-			<p>YOUR MOVE: WAITING FOR YOUR MOVE</p>
+			<p>YOUR MOVE: WAITING FOR YOUR MOVE<br>
 		<% else %>
-			<p>YOUR MOVE: <%= round[:your_move] %></p>
+			<p>YOUR MOVE: <%= round[:your_move] %><br>
 		<% end %>
 		<% if round[:their_move].nil? %>		
-			<p>YOUR OPPONENT'S MOVE: WAITING FOR YOUR OPPONENT TO PLAY</p>
+			YOUR OPPONENT'S MOVE: WAITING FOR OPPONENT</p>
 		<% else %>
-			<p>YOUR OPPONENT'S MOVE: WAITING FOR YOUR MOVE</p>
+			YOUR OPPONENT'S MOVE: WAITING FOR YOUR MOVE</p>
 		<% end %>
 	<% else %>
-		<p>ROUND: <%= round[:round_id] %></p>
-		<p>YOUR MOVE: <%= round[:your_move] %></p>
-		<p>YOUR OPPONENT'S MOVE: <%= round[:their_move] %></p>
-		<p>RESULT: <%= round[:result] %></p>
+		<h4>ROUND: <%= round[:round_id] %><br>
+		RESULT: <%= round[:result] %></h4>
+		<p>YOUR MOVE: <%= round[:your_move] %><br>
+		YOUR OPPONENT'S MOVE: <%= round[:their_move] %></p>
 	<% end %>
 	</div>
 </div>

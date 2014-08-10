@@ -71,6 +71,7 @@ get '/view/:match_id' do
   @user = RPS::DBI.dbi.get_user_by_id(session['rps'])
   @history = RPS::MatchHistory.run(session['rps'], params['match_id'])
   @opponent = RPS::GetOpponent.run(session['rps'], params['match_id'])
+  @match_id = params["match_id"]
   erb :view
 end
 
