@@ -1,5 +1,5 @@
 module RPS
-	class DataAboutMatch
+	class MatchHistory
 
     def self.run
 

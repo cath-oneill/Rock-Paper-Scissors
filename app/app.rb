@@ -58,11 +58,13 @@ get '/signout' do
 end
 
 get '/play/:match_id/:round_id' do
-  @user = RPS::GetUserInfo.run(session['rps'])
+  @user = RPS::DBI.dbi.get_user_by_id(session['rps'])
   @game_info = {
     match_id: params['match_id'],
+    player_position: RPS::GetPlayerPosition.run(session['rps'], params[:match_id]),
     round_id: params['round_id']
   }
+  @history = RPS::DBI.dbi.get_rounds_by_match_id(params[:match_id])
   erb :play
 end
 

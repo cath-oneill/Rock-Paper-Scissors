@@ -14,5 +14,7 @@ require_relative 'scripts/createnewmatch.rb'
 require_relative 'scripts/getmatchinfo.rb'
 require_relative 'scripts/recordmove.rb'
 require_relative 'scripts/editpassword.rb'
+require_relative 'scripts/getplayerposition.rb'
+require_relative 'scripts/matchhistory.rb'
 
 
