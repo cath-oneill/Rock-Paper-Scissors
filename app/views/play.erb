@@ -1,18 +1,18 @@
 <div class="row">
 	<div class="columns large-12">
-		<p>Hello <%= @user.name %>! You are playing round <%= @game_info[:round_id] %> of match <%= @game_info[:match_id]%>.</p>
 		<div class="row">
-		<form class="columns large-3" method="post" action="/play/<%= @game_info[:match_id] %>/<%= @game_info[:round_id] %>/r">
-			<h1><input type="submit" value="ROCK" class="button"></h1>
+			<br>
+		<form class="columns large-6" method="post" action="/play/<%= @game_info[:match_id] %>/<%= @game_info[:round_id] %>/r">
+			<h1><input type="submit" value="ROCK" class="button success expand"></h1>
 		</form>
-		<form class="columns large-3" method="post" action="/play/<%= @game_info[:match_id] %>/<%= @game_info[:round_id] %>/p">
-			<h1><input type="submit" value="PAPER" class="button"></h1>
+		<form class="columns large-6" method="post" action="/play/<%= @game_info[:match_id] %>/<%= @game_info[:round_id] %>/p">
+			<h1><input type="submit" value="PAPER" class="button success expand"></h1>
 		</form>
-		<form class="columns large-3" method="post" action="/play/<%= @game_info[:match_id] %>/<%= @game_info[:round_id] %>/s">
-			<h1><input type="submit" value="SCISSORS" class="button"></h1>
+		<form class="columns large-6" method="post" action="/play/<%= @game_info[:match_id] %>/<%= @game_info[:round_id] %>/s">
+			<h1><input type="submit" value="SCISSORS" class="button success expand"></h1>
 		</form>		
-		<form class="columns large-2" method="post" action="/play/<%= @game_info[:match_id] %>/<%= @game_info[:round_id] %>/x">
-			<h1><input type="submit" value="?" class="button"></h1>
+		<form class="columns large-6" method="post" action="/play/<%= @game_info[:match_id] %>/<%= @game_info[:round_id] %>/x">
+			<h1><input type="submit" value="???" class="button success expand"></h1>
 		</form>		
 		</div>
 	</div>
