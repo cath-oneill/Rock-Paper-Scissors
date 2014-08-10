@@ -4,10 +4,12 @@
 <% losses = @history.count {|r| r[:result] == "YOU LOST!"} %>
 <% ties = @history.count {|r| r[:result] == "TIED ROUND"} %>
 <div class="row">
-	<div class="columns small-12 panel callout">
-		<h3>WINS: <%= wins %></h3>
-		<h3>LOSSES: <%= losses %></h3>
-		<h3>WINS: <%= ties %></h3>
+	<div class="columns small-12 panel">
+		<ul class="small-block-grid-3">
+			<li class="panel callout">WINS: <%= wins %> </li>
+			<li class="panel callout">LOSSES: <%= losses %> </li>
+			<li class="panel callout">TIES: <%= ties %> </li>
+		</ul>
 		<% if wins==3 %>
 		<h2>MATCH OVER. YOU WON! </h3>
 		<% elsif losses==3 %>
@@ -36,8 +38,7 @@
 			YOUR OPPONENT'S MOVE: WAITING FOR YOUR MOVE</p>
 		<% end %>
 	<% else %>
-		<h4>ROUND: <%= round[:round_id] %><br>
-		RESULT: <%= round[:result] %></h4>
+		<h4>ROUND <%= round[:round_id] %>: <%= round[:result] %></h4>
 		<p>YOUR MOVE: <%= round[:your_move] %><br>
 		YOUR OPPONENT'S MOVE: <%= round[:their_move] %></p>
 	<% end %>

@@ -7,28 +7,32 @@
 	<!-- FIRST: List current games... -->
 	<% @match_info.each do |match| %>
 		<% if match[:completed] == false && match[:already_played] == false %>
-	    <form class="row" method = "get" action="/play/<%= match[:match_id] %>/<%= match[:current_round] %>">
+	    <div class="row">
 		<div class="columns large-12 panel">
 			<div class="row">
-			<p class = "small-10 small-centered columns">OPPONENT: <%= match[:opponent_name] %></p>
-			</div>
-
-			<div class="row">
-				<div class="columns small-10 small-centered">
+			<div class="small-10 small-centered columns">
+	    	<form  method = "get" action="/play/<%= match[:match_id] %>/<%= match[:current_round] %>">
+				<p>OPPONENT: <%= match[:opponent_name] %></p>
+				<div class="row">
+				<div class="columns small-12">
 				<ul class="small-block-grid-3">
 					<li class="panel callout">WINS: <%= match[:current_wins] %> </li>
 					<li class="panel callout">LOSSES: <%= match[:current_losses] %> </li>
 					<li class="panel callout">TIES: <%= match[:current_ties] %> </li>
 				</ul>
 				</div>
-			</div>
-			<div class="row">
-				<div class="columns small-10 small-centered">
-				<input type="submit" class="button success expand" value = "PLAY THIS MATCH!">
+				</div>
+				<div class="columns">
+					<input type="submit" class="button success expand left" value = "PLAY THIS MATCH!">
+				</div>
+			</form>
+				<div class="columns right">
+					<a href="/view/<%= match[:match_id]%>"><button class="expand">VIEW MATCH HISTORY</button></a>
 				</div>
 			</div>
+			</div>
 		</div>
-		</form>
+		</div>
 		<% end %>
 	<% end %>
 
