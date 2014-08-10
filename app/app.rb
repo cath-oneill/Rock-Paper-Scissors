@@ -67,16 +67,17 @@ get '/play/:match_id/:round_id' do
   erb :play
 end
 
-get '/view/:match_id/:opponent_id' do
+get '/view/:match_id' do
   @user = RPS::DBI.dbi.get_user_by_id(session['rps'])
   @history = RPS::MatchHistory.run(session['rps'], params['match_id'])
-  @opponent = RPS::DBI.dbi.get_user_by_id(params['opponent_id'])
+  @opponent = RPS::GetOpponent.run(session['rps'], params['match_id'])
   erb :view
 end
 
 post '/play/:match_id/:round_id/:move' do
   @user = RPS::DBI.dbi.get_user_by_id(session['rps'])
   @feedback = RPS::RecordMove.run(session['rps'], params['match_id'], params['round_id'], params['move'])
+  @match_id = params['match_id']
   erb :feedback
 end
 

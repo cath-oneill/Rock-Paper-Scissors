@@ -4,10 +4,7 @@ module RPS
       current_user = RPS::GetUserInfo.run(current_user_id)
       this_match = current_user.matches.find{|x| x.match_id == this_match_id}
       this_round = this_match.rounds.find{|x| x.round_id == this_round_id}
-
-      #identify whether player is in position one or two in this match
-      player_position = 1 if current_user_id == this_match.player_1_id 
-      player_position = 2 if current_user_id == this_match.player_2_id 
+      player_position = RPS::GetPlayerPosition.run(current_user_id, this_match_id)
 
       #randomly assign value for ?
       if this_move == 'x'
