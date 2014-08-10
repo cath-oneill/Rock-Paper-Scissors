@@ -1,4 +1,5 @@
 require 'digest/sha1'
+require 'digest/md5'
 
 module RPS
   class User
@@ -14,6 +15,8 @@ module RPS
       @matches = []
     end
 
+    def set_profile_pic
+    end
 
     def wins
       wins = 0 
@@ -32,7 +35,7 @@ module RPS
     def completed_matches
       stats = 0
       @matches.each do |match| 
-        if match.completed == true
+        if match.completed == true                                                              
           stats +=1
         end       
       end 
@@ -40,7 +43,7 @@ module RPS
     end   
     
     def wins_percentage
-      wins.to_f/ completed_matches
+      wins* 100/ completed_matches
     end   
 
     def stats 

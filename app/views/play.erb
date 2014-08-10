@@ -11,9 +11,38 @@
 		<form class="columns large-3" method="post" action="/play/<%= @game_info[:match_id] %>/<%= @game_info[:round_id] %>/s">
 			<h1><input type="submit" value="SCISSORS" class="button"></h1>
 		</form>		
-		<form class="columns large-2" method="post" action="/play/<%= @game_info[:match_id] %>/<%= @game_info[:round_id] %>/R">
+		<form class="columns large-2" method="post" action="/play/<%= @game_info[:match_id] %>/<%= @game_info[:round_id] %>/x">
 			<h1><input type="submit" value="?" class="button"></h1>
 		</form>		
 		</div>
 	</div>
 </div>
+
+<!-- SET VARIABLES NEEDED FOR LISTING PRIOR ROUNDS IN THIS MATCH -->
+<% this_match = @user.matches.find {|match| match.match_id == @game_info[:match_id] }%>
+<% player_position = 1 if this_match.player_1_id == @user.user_id %>
+<% player_position = 2 if this_match.player_2_id == @user.user_id %>
+<% this_match_rounds = this_match.rounds.delete_if { |round| round.round_id == @game_info[:round_id] } %>
+
+<% this_match_rounds.each do |round| %>
+	ROUND: <%= round.round_id %>
+	YOUR MOVE: 
+	<% if player_position == 1 %>
+		<%= round.player_1_move %>
+	<% else %>
+		<%= round.player_2_move %>
+	<% end %>
+	YOUR OPPONENT'S MOVE:
+	<% if player_position == 1 %>
+		<%= round.player_2_move %>
+	<% else %>
+		<%= round.player_1_move %>
+	<% end %>	
+	RESULT:
+	<% if round.result == player_position %>
+		YOU WON!
+	<% else %>
+		YOU LOST!
+	<% end %>
+<% end %>
+<br>

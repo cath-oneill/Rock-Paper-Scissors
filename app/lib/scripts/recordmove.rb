@@ -10,7 +10,7 @@ module RPS
       player_position = 2 if current_user_id == this_match.player_2_id 
 
       #randomly assign value for ?
-      if this_move == '?'
+      if this_move == 'x'
         number = rand(3)
         this_move = 'r' if number == 0
         this_move = 's' if number == 1

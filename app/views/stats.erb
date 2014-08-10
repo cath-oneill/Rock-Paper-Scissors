@@ -3,7 +3,7 @@
     <h2><%= @user.name %> Statistics</h2>
     <br>
         
-        <h4>Win Percentage: <%= @user.wins_percentage %>%</h4>
+        <h4>Win Percentage: <%= @user.wins_percentage.round(1) %>%</h4>
         <div class="progress success radius">
             <span class="meter" style="width: <%= @user.wins_percentage %>%"></span>
         </div>
@@ -11,7 +11,7 @@
         <hr>
         <br>
         
-        <h4>Loss Percentage: <%= 100 - @user.wins_percentage %>%</h4>
+        <h4>Loss Percentage: <%= (100 - @user.wins_percentage).round(1) %>%</h4>
         <div class="progress radius alert">
             <span class="meter" style="width: <%= 100 - @user.wins_percentage %>%"></span>
         </div>
@@ -22,7 +22,7 @@
         <h4>Completed Matches: <%= @user.completed_matches %></h4>
         <h4>Total Matches: <%= @user.all_matches %></h4>
         <br>
-        <h4>Percent of Matches Completed: <%= @user.completed_matches * 100.0/@user.all_matches %>%</h4>
+        <h4>Percent of Matches Completed: <%= (@user.completed_matches * 100.0/@user.all_matches).round(1) %>%</h4>
         <div class="progress radius">
             <span class="meter" style="width: <%= @user.completed_matches * 100/@user.all_matches %>%"></span>
         </div>
