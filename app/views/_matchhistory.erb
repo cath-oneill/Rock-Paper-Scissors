@@ -1,25 +1,30 @@
-<% @history.sort_by {|round| round.round_id} %>
 
-<% @history.each do |round| %>
+<% sorted = @history.sort_by {|round| round[:round_id]}.reverse  #most recent first %>
 
-	ROUND: <%= round.round_id %>
-	YOUR MOVE: 
-	<% if @game_info[:player_position] == 1 %>
-		<%= round.player_1_move %>
+<% sorted.each do |round| %>
+<div class="row">
+	<div class="columns small-12 panel">
+		
+	<% if round[:result].nil? %>
+		<p>ROUND: <%= round[:round_id] %></p>
+		<% if round[:your_move].nil? %>
+			<p>YOUR MOVE: WAITING FOR YOUR MOVE</p>
+		<% else %>
+			<p>YOUR MOVE: <%= round[:your_move] %></p>
+		<% end %>
+		<% if round[:their_move].nil? %>		
+			<p>YOUR OPPONENT'S MOVE: WAITING FOR YOUR OPPONENT TO PLAY</p>
+		<% else %>
+			<p>YOUR OPPONENT'S MOVE: WAITING FOR YOUR MOVE</p>
+		<% end %>
 	<% else %>
-		<%= round.player_2_move %>
+		<p>ROUND: <%= round[:round_id] %></p>
+		<p>YOUR MOVE: <%= round[:your_move] %></p>
+		<p>YOUR OPPONENT'S MOVE: <%= round[:their_move] %></p>
+		<p>RESULT: <%= round[:result] %></p>
 	<% end %>
-	YOUR OPPONENT'S MOVE:
-	<% if @game_info[:player_position] == 1 %>
-		<%= round.player_2_move %>
-	<% else %>
-		<%= round.player_1_move %>
-	<% end %>	
-	RESULT:
-	<% if round.result == @game_info[:player_position] %>
-		YOU WON!
-	<% else %>
-		YOU LOST!
-	<% end %>
+	</div>
+</div>
+
 <% end %>
 <br>

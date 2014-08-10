@@ -61,15 +61,17 @@ get '/play/:match_id/:round_id' do
   @user = RPS::DBI.dbi.get_user_by_id(session['rps'])
   @game_info = {
     match_id: params['match_id'],
-    player_position: RPS::GetPlayerPosition.run(session['rps'], params[:match_id]),
     round_id: params['round_id']
   }
-  @history = RPS::DBI.dbi.get_rounds_by_match_id(params[:match_id])
+  @history = RPS::MatchHistory.run(session['rps'], params['match_id'])
   erb :play
 end
 
-get '/view/:match_id/' do
+get '/view/:match_id/:opponent_id' do
   @user = RPS::DBI.dbi.get_user_by_id(session['rps'])
+  @history = RPS::MatchHistory.run(session['rps'], params['match_id'])
+  @opponent = RPS::DBI.dbi.get_user_by_id(params['opponent_id'])
+  erb :view
 end
 
 post '/play/:match_id/:round_id/:move' do
@@ -87,7 +89,7 @@ end
 get '/newmatch/:opponent_id' do
   @game_info = RPS::CreateNewMatch.run(session['rps'], params['opponent_id'])
   @user = RPS::DBI.dbi.get_user_by_id(session['rps'])
-  @history = RPS::DBI.dbi.get_rounds_by_match_id(@game_info[:match_id])
+  @history = RPS::MatchHistory.run(session['rps'], @game_info[:match_id])
   erb :play
 end
 
