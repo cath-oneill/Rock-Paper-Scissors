@@ -43,7 +43,11 @@ module RPS
     end   
     
     def wins_percentage
-      wins* 100/ completed_matches
+      if completed_matches > 0
+        return wins* 100/ completed_matches
+      else
+        return 0
+      end
     end   
 
     def stats 

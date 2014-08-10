@@ -11,7 +11,8 @@ module RPS
 
         {
           match_id: this_match_id,
-          round_id: 1
+          round_id: 1,
+          player_position: 1
         }
     end
   end

@@ -68,21 +68,26 @@ get '/play/:match_id/:round_id' do
   erb :play
 end
 
+get '/view/:match_id/' do
+  @user = RPS::DBI.dbi.get_user_by_id(session['rps'])
+end
+
 post '/play/:match_id/:round_id/:move' do
-  @user = RPS::GetUserInfo.run(session['rps'])
+  @user = RPS::DBI.dbi.get_user_by_id(session['rps'])
   @feedback = RPS::RecordMove.run(session['rps'], params['match_id'], params['round_id'], params['move'])
   erb :feedback
 end
 
 get '/players' do
-  @user = RPS::GetUserInfo.run(session['rps'])
+  @user = RPS::DBI.dbi.get_user_by_id(session['rps'])
   @all_users = RPS::DBI.dbi.get_all_profile_info
   erb :players
 end
 
 get '/newmatch/:opponent_id' do
   @game_info = RPS::CreateNewMatch.run(session['rps'], params['opponent_id'])
-  @user = RPS::GetUserInfo.run(session['rps'])
+  @user = RPS::DBI.dbi.get_user_by_id(session['rps'])
+  @history = RPS::DBI.dbi.get_rounds_by_match_id(@game_info[:match_id])
   erb :play
 end
 
@@ -94,12 +99,12 @@ get '/stats' do
 end
 
 get '/editprofile' do
-  @user = RPS::GetUserInfo.run(session['rps'])
+  @user = RPS::DBI.dbi.get_user_by_id(session['rps'])
   erb :editprofile
 end
 
 post '/editpassword' do
-  @user = RPS::GetUserInfo.run(session['rps'])
+  @user = RPS::DBI.dbi.get_user_by_id(session['rps'])
   password_response = RPS::EditPassword.run(params, @user)
   flash.now[:alert] = password_response[:message]
   redirect to '/editprofile'

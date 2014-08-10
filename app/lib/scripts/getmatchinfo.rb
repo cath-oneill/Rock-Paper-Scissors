@@ -11,11 +11,7 @@ module RPS
       user.matches.each do |x|
         this_match = {}
       
-        if x.player_1_id == user.user_id
-          player_number = 1
-        elsif x.player_2_id == user.user_id
-          player_number = 2
-        end
+        player_number = RPS::GetPlayerPosition.run(user.user_id, x.match_id)
       
         current_round_id = x.rounds.max_by { |y| y.round_id }.round_id
         current_round = x.rounds.max_by { |y| y.round_id }

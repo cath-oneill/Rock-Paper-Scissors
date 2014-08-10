@@ -18,28 +18,4 @@
 	</div>
 </div>
 
-<!-- MATCH HISTORY -->
-
-<% @history.each do |round| %>
-
-	ROUND: <%= round.round_id %>
-	YOUR MOVE: 
-	<% if @game_info[:player_position] == 1 %>
-		<%= round.player_1_move %>
-	<% else %>
-		<%= round.player_2_move %>
-	<% end %>
-	YOUR OPPONENT'S MOVE:
-	<% if @game_info[:player_position] == 1 %>
-		<%= round.player_2_move %>
-	<% else %>
-		<%= round.player_1_move %>
-	<% end %>	
-	RESULT:
-	<% if round.result == @game_info[:player_position] %>
-		YOU WON!
-	<% else %>
-		YOU LOST!
-	<% end %>
-<% end %>
-<br>
+<%= erb :_matchhistory %>
