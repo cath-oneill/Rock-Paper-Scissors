@@ -1,6 +1,12 @@
+<% if @user.matches.all? { |match| match.winner_id.nil? } %>
+    <br>    
+    <h4>We can't calculate your stats yet.  You haven't completed a match! </h4>
+    <p><a href="/">Play now</a> or </h4><a href="/players">challenge</a> another player to a match.</p>
+<% else %>
+
 <div class="row">
   <div class="columns large-12">
-    <h2><%= @user.name %> Statistics</h2>
+    <h2><%= @user.name %>'s Statistics</h2>
     <br>
         
         <h4>Win Percentage: <%= @user.wins_percentage.round(1) %>%</h4>
@@ -31,3 +37,5 @@
 
   </div>
 </div>
+
+<% end %>
