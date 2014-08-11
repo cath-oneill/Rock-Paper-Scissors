@@ -43,6 +43,7 @@ module RPS
       
         this_match[:opponent_id] = opponent
         this_match[:opponent_name] = RPS::DBI.dbi.get_user_name_by_id(opponent)
+        this_match[:opponent_profile_pic] = RPS::DBI.dbi.get_user_profile_pic_by_id(opponent)
 
         #then the current hash is shoveled into the larger array
         match_info << this_match

@@ -92,6 +92,10 @@ module RPS
     def get_user_name_by_id(this_id)
       get_user_by_id(this_id).name
     end
+
+    def get_user_profile_pic_by_id(this_id)
+      get_user_by_id(this_id).profile_pic
+    end
     #FOR USE IN PLAYERS PAGE
     def get_all_profile_info
       response = @db.exec("SELECT name, user_id, profile_pic FROM users;")

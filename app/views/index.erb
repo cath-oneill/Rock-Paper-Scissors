@@ -12,7 +12,11 @@
 			<div class="row">
 			<div class="small-10 small-centered columns">
 	    	<form  method = "get" action="/play/<%= match[:match_id] %>/<%= match[:current_round] %>">
-				<p>OPPONENT: <%= match[:opponent_name] %></p>
+	    		<div class="row">
+					<img  class= "columns small-3" src="<%= match[:opponent_profile_pic]%>" alt="">
+					<h5 class="columns small-9">OPPONENT: <%= match[:opponent_name] %></h5>
+				</div>
+				<br>
 				<div class="row">
 				<div class="columns small-12">
 				<ul class="small-block-grid-3">
@@ -40,9 +44,12 @@
 	<% @match_info.each do |match| %>
 		<% if match[:completed] == false && match[:already_played] == true %>
 		<div class="row">
-		<div class="columns large-12 panel">
+		<div class="columns small-12 panel">
 			<div class="row">
-			<p class = "small-10 small-centered columns">OPPONENT: <%= match[:opponent_name] %><br><em>You've already played this round.  Waiting for your opponent!</em></p>
+				<div class="small-10 small-centered columns">
+					<img  class= "columns small-3" src="<%= match[:opponent_profile_pic]%>" alt="">
+					<p class = "small-9 columns">OPPONENT: <%= match[:opponent_name] %><br><em>You've already played this round.  Waiting for your opponent!</em></p>
+				</div>
 			</div>
 
 			<div class="row">
@@ -70,14 +77,18 @@
 		<div class="row">
 		<div class="columns large-12 panel">
 			<div class="row">
-			<p class = "columns small-10 small-centered">OPPONENT: <%= match[:opponent_name] %><br>
+			<div class = "columns small-10 small-centered">
+				<img  class= "columns small-3" src="<%= match[:opponent_profile_pic]%>" alt="">
+				<p class = "columns small-9">OPPONENT: <%= match[:opponent_name] %><br>
 
 			<% if match[:current_wins] >= 3 %>
 			<em>GAME OVER! YOU WON!</em>
 			<% elsif match[:current_wins] <= 3 %>
-			<em>GAME OVER! YOU LOST!</em>
+			<em>GAME OVER! YOU LOST!</em></p>
 			<% end %></p>
+				</div>
 			</div>
+			<br>
 
 			<div class="row">
 				<div class="columns small-10 small-centered">
