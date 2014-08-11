@@ -109,7 +109,7 @@ module RPS
         INSERT INTO matches (player_1_id, player_2_id)
         VALUES ($1, $2)
         RETURNING *;
-      ], [this_match.player_1_id, this_match.player_2_id])
+      ], [this_match.player_1_id.to_i, this_match.player_2_id.to_i])
     end
 
     def update_match(this_match)

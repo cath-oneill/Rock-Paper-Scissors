@@ -93,6 +93,7 @@ get '/newmatch/:opponent_id' do
   @game_info = RPS::CreateNewMatch.run(session['rps'], params['opponent_id'])
   @user = RPS::DBI.dbi.get_user_by_id(session['rps'])
   @history = RPS::MatchHistory.run(session['rps'], @game_info[:match_id])
+  @opponent = RPS::GetOpponent.run(session['rps'], @game_info[:match_id])  
   erb :play
 end
 

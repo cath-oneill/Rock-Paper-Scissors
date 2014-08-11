@@ -1,10 +1,10 @@
 <h2>Viewing Match History</h2>
+<% if @history.any? {|r| r[:your_move].nil? } %>
+	<a href="/play/<%= @match_id %>/<%= @history.length %>"><button class="success expand">Play this game now!</button></a>
+<% end %>
 <div class="row">
 	<img class = "columns small-3" src="<%= @opponent[:profile_pic]%>" alt="">
 	<h4 class="columns small-9">Opponent: <%= @opponent[:name] %> </h4>
 </div>
 <br>
-<% if @history.any? {|r| r[:your_move].nil? } %>
-	<a href="/play/<%= @match_id %>/<%= @history.length %>"><button class="success expand">Play this game now!</button></a>
-<% end %>
 <%= erb :_matchhistory %>
