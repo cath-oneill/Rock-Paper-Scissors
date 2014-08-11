@@ -1,6 +1,7 @@
   <h2>Challenge another player!</h2>
 <div class="columns large-12">
   <%  @all_users.delete_if { |user| user[:user_id] == @user.user_id} %>
+  <% @all_users.sort_by! {|user| user[:name]} %>
   <% @all_users.each do |user| %>
     <a href='/newmatch/<%= user[:user_id] %>'>
     <div class="row panel">
