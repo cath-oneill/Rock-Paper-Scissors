@@ -114,6 +114,13 @@ post '/editpassword' do
   redirect to '/editprofile'
 end
 
+post '/editemail' do
+  @user = RPS::DBI.dbi.get_user_by_id(session['rps'])
+  email_response = RPS::EditEmail.run(params, @user)
+  flash.now[:alert] = email_response[:message]
+  redirect to '/editprofile'
+end
+
 
 
 

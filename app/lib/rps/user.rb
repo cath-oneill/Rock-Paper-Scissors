@@ -15,7 +15,13 @@ module RPS
       @matches = []
     end
 
+    def update_email(email)
+      @email = email
+    end
+
     def set_profile_pic
+      hash = Digest::MD5.hexdigest(@email)
+      @profile_pic = "http://www.gravatar.com/avatar/#{hash}"
     end
 
     def wins

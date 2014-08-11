@@ -2,7 +2,8 @@
 <div class="header">
   <h2>Rock, Paper, Scissors</h2>
   <% if session['rps'] %>
-    <h4> You are signed in as <%= @user.name %>.</h4>
+  	<img class = "columns small-4" src="<%= @user.profile_pic %>">
+    <h4 class= "columns small-8"> <%= @user.name %></h4>
   <% end %>
   <img src="http://spudcomics.com/comics/2009-01-27-dynamite.png"/>
 </div>

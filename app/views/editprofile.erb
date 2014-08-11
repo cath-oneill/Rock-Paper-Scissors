@@ -1,11 +1,19 @@
 <div align="center">
-  <% if flash[:alert] %>
-    <%= flash[:alert] %>
-  <% end %>
-  <form action='/editpassword' method='post'>
-	<h2>Update your password:</h2>
-    <input type='password' name='password' placeholder='Change Your Password'><br />
-    <input type='password' name='password_conf' placeholder='Verify New Password'><br />
-    <input type='submit' class="button" value='Submit'>
-  </form>
+	<% if flash[:alert] %>
+    	<%= flash[:alert] %>
+  	<% end %>
+  	<form action='/editpassword' method='post'>
+		<h2>Update your password:</h2>
+    	<input type='password' name='password' placeholder='Change Your Password'><br />
+    	<input type='password' name='password_conf' placeholder='Verify New Password'><br />
+    	<input type='submit' class="button" value='Submit'>
+  	</form>
+
+  	<hr>
+  
+ 	<form action='/editemail' method='post'>
+		<h2>Update your Email:</h2>
+    	<input type='email' name='email' placeholder='Change Your Email'><br />
+    	<input type='submit' class="button" value='Submit'>
+  	</form>
 </div>

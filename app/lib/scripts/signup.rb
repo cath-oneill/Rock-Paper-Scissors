@@ -12,6 +12,7 @@ module RPS
       email = params['email'].downcase.strip #need for Gravatar
       user = RPS::User.new(params['screenname'], email)
       user.update_password(params['password'])
+      user.set_profile_pic
       RPS::DBI.dbi.save_user(user)
       
       {
