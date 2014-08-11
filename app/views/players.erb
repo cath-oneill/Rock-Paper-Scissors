@@ -4,6 +4,7 @@
   <% @all_users.each do |user| %>
     <a href='/newmatch/<%= user[:user_id] %>'>
     <div class="row panel">
+      <img src="<%= user[:profile_pic] %>" alt="">
       <%= user[:name] %>
     </div>
     <br>
