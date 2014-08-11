@@ -28,19 +28,19 @@
 	<% if round[:result].nil? %>
 		<h4>ROUND: <%= round[:round_id] %></h4>
 		<% if round[:your_move].nil? %>
-			<p>YOUR MOVE: WAITING FOR YOUR MOVE<br>
+			<p>Your Move: Waiting for your move<br>
 		<% else %>
-			<p>YOUR MOVE: <%= round[:your_move] %><br>
+			<p>Your Move: <%= round[:your_move] %><br>
 		<% end %>
 		<% if round[:their_move].nil? %>		
-			YOUR OPPONENT'S MOVE: WAITING FOR OPPONENT</p>
+			Your Opponent's Move: Waiting for <%= @opponent[:name] %>'s move</p>
 		<% else %>
-			YOUR OPPONENT'S MOVE: WAITING FOR YOUR MOVE</p>
+			Your Opponent's Move: BLOCKED</p>
 		<% end %>
 	<% else %>
 		<h4>ROUND <%= round[:round_id] %>: <%= round[:result] %></h4>
-		<p>YOUR MOVE: <%= round[:your_move] %><br>
-		YOUR OPPONENT'S MOVE: <%= round[:their_move] %></p>
+		<p>Your Move: <%= round[:your_move] %><br>
+		Your Opponent's Move: <%= round[:their_move] %></p>
 	<% end %>
 	</div>
 </div>

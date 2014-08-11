@@ -64,6 +64,7 @@ get '/play/:match_id/:round_id' do
     round_id: params['round_id']
   }
   @history = RPS::MatchHistory.run(session['rps'], params['match_id'])
+  @opponent = RPS::GetOpponent.run(session['rps'], params['match_id'])
   erb :play
 end
 

@@ -10,7 +10,10 @@ module RPS
       end
 
       opponent = RPS::DBI.dbi.get_user_by_id(opponent_id)
-      opponent.name
+      {
+        name: opponent.name,
+        profile_pic: opponent.profile_pic
+      }
     end
   end
 end

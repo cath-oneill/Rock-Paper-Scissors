@@ -17,5 +17,9 @@
 		</div>
 	</div>
 </div>
-
+<div class="row">
+	<img class = "columns small-3" src="<%= @opponent[:profile_pic]%>" alt="">
+	<h4 class="columns small-9">Opponent: <%= @opponent[:name] %> </h4>
+</div>
+<br>
 <%= erb :_matchhistory %>
