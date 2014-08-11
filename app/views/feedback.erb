@@ -27,3 +27,7 @@
 <a href="/"><button class = "button expand">RETURN TO HOME SCREEN</button></a>
 <br>
 <a href="/view/<%= @match_id %>"><button class = "button expand">VIEW HISTORY OF THIS MATCH</button></a>
+<br>
+<% unless @feedback == "YOU LOST THE MATCH." || @feedback == "YOU WON THE MATCH!" || @feedback == "WAITING FOR OPPONENT" %>
+<a href="/play/<%= @match_id %>/<%= @next_round %>"><button class = "button expand success">PLAY NEXT ROUND!</button></a>
+<% end %>

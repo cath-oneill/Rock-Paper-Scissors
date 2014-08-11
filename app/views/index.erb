@@ -3,7 +3,11 @@
 	<% if @match_info.empty? %>
 		<br>	
 		<h4 class="columns small-10 small-centered">You don't have any games started yet! <a href="/players">Challenge</a> another player to a match.</h4>
+	<% elsif @match_info.all? {|match| match[:completed]} %>
+		<br>	
+		<h4 class="columns small-10 small-centered">All of your games have been finished. <a href="/players">Challenge</a> another player to a match.</h4>
 	<% end %>
+	
 	<!-- FIRST: List current games... -->
 	<% @match_info.each do |match| %>
 		<% if match[:completed] == false && match[:already_played] == false %>
@@ -70,42 +74,7 @@
 		</div>
 		<% end %>
 	<% end %>
-		
-	<!-- THIRD LIST COMPLETED GAMES -->
-	<% @match_info.each do |match| %>
-		<% if match[:completed] == true %>
-		<div class="row">
-		<div class="columns large-12 panel">
-			<div class="row">
-			<div class = "columns small-10 small-centered">
-				<img  class= "columns small-3" src="<%= match[:opponent_profile_pic]%>" alt="">
-				<p class = "columns small-9">OPPONENT: <%= match[:opponent_name] %><br>
+	<a href="/archives"><button class="expand">VIEW ARCHIVED MATCHES</button></a>
+	<br>
 
-			<% if match[:current_wins] >= 3 %>
-			<em>GAME OVER! YOU WON!</em>
-			<% elsif match[:current_wins] <= 3 %>
-			<em>GAME OVER! YOU LOST!</em></p>
-			<% end %></p>
-				</div>
-			</div>
-			<br>
-
-			<div class="row">
-				<div class="columns small-10 small-centered">
-				<ul class="small-block-grid-3">
-					<li class="panel callout">WINS: <%= match[:current_wins] %> </li>
-					<li class="panel callout">LOSSES: <%= match[:current_losses] %> </li>
-					<li class="panel callout">TIES: <%= match[:current_ties] %> </li>
-				</ul>
-				</div>
-			</div>
-			<div class="row">
-				<div class="columns small-10 small-centered">
-					<a href="/view/<%= match[:match_id]%>"><button class="expand">VIEW MATCH HISTORY</button></a>
-				</div>
-			</div>			
-		</div>
-		</div>
-		<% end %>
-	<% end %>
 </div>

@@ -80,6 +80,7 @@ post '/play/:match_id/:round_id/:move' do
   @user = RPS::DBI.dbi.get_user_by_id(session['rps'])
   @feedback = RPS::RecordMove.run(session['rps'], params['match_id'], params['round_id'], params['move'])
   @match_id = params['match_id']
+  @next_round = params['round_id'].to_i + 1
   erb :feedback
 end
 
@@ -123,6 +124,11 @@ post '/editemail' do
   redirect to '/editprofile'
 end
 
+get '/archives' do
+  @user = RPS::GetUserInfo.run(session['rps'])
+  @match_info = RPS::GetMatchInfo.run(@user)
+  erb :archives
+end
 
 
 
