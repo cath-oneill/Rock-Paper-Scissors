@@ -102,6 +102,12 @@ module RPS
       response.map {|row| {name: row["name"], user_id: row["user_id"], profile_pic: row["profile_pic"]}}
     end
 
+    #to send emails
+    def get_name_and_email(id)
+      response = @db.exec("SELECT name, email FROM users WHERE user_id = '#{id}';")
+      {name: response.first["name"], email: response.first["email"]}
+    end
+
   # Method to create a match record
     #
     def save_match(this_match)
